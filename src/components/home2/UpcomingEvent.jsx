@@ -111,7 +111,7 @@ const UpcomingEvent = () => {
 
                             <div className="pt-4">
                                 <Link
-                                    to="/notices"
+                                    to="/home2"
                                     className="inline-flex items-center gap-2.5 px-6 py-3.5  bg-amber-500 text-maroon-950 font-heading font-bold text-sm hover:bg-amber-400 transition-all shadow-lg group"
                                 >
                                     <span>View Full Schedule & Details</span>

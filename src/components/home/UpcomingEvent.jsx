@@ -125,7 +125,7 @@ const UpcomingEvent = () => {
                             </div>
 
                             <div className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                                <Link to="/upcoming-events" className="btn-primary">
+                                <Link to="/" className="btn-primary">
                                     <span>View Full Schedule</span>
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>

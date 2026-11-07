@@ -26,7 +26,7 @@ const HeroBanner = () => {
 
                         <div className="flex items-center gap-4 pt-4">
                             <Link
-                                to="/"
+                                to="/home2"
                                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-amber-500 text-maroon-900 font-bold text-sm hover:bg-amber-400 transition-all shadow-lg group"
                             >
                                 <span>Book Puja</span>
@@ -34,7 +34,7 @@ const HeroBanner = () => {
                             </Link>
 
                             <Link
-                                to="/"
+                                to="/home2"
                                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent border-2 border-amber-500/60 text-amber-200 font-bold text-sm hover:bg-maroon-800 transition-all shadow-md group"
                             >
                                 <Calendar className="w-4 h-4" />

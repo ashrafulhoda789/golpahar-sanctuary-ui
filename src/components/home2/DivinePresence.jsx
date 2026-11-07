@@ -69,7 +69,7 @@ const DivinePresence = () => {
 
                         <div className="pt-2">
                             <Link
-                                to="/"
+                                to="/hom2"
                                 className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-maroon-900 text-amber-200 font-heading font-bold text-sm hover:bg-maroon-950 transition-all shadow-lg group"
                             >
                                 <span>Explore Our Temple Heritage</span>
