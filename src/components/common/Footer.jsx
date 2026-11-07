@@ -4,7 +4,7 @@ import { MapPin, Mail, Globe, Video, Camera } from 'lucide-react';
 const Footer = () => {
     return (
         <footer className="relative bg-maroon-900 text-amber-100 pt-14 pb-8 border-t-4 border-amber-500/50">
-            <div className="max-w-450 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 pb-12 border-b border-maroon-800/80 items-start">
 

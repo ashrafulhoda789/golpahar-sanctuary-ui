@@ -51,7 +51,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-[#f8d287] sticky top-0 z-50 transition-all">
-            <div className="max-w-450 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
 
                     <Link to="/" className="flex items-center gap-2 sm:gap-3 shrink-0">

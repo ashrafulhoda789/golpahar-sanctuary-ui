@@ -36,7 +36,7 @@ const HeroBanner = () => {
     return (
         <section className="relative bg-cream-100 overflow-hidden py-6 lg:py-0 ">
 
-            <div className="max-w-450 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row lg:min-h-125">
 
                     <div className="relative z-10 lg:w-[42%] flex flex-col justify-center py-8 lg:py-0 pt-0 lg:pt-10 lg:pr-6 text-center lg:text-left">

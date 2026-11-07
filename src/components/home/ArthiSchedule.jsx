@@ -25,7 +25,7 @@ const ArthiSchedule = () => {
 
     return (
         <section className="relative bg-cream-200 overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-350 mx-auto w-full">
+            <div className="max-w-320 mx-auto w-full">
 
                 <div className="text-center mb-10">
                     <div className="inline-flex items-center gap-3 mb-2">
