@@ -2,8 +2,6 @@ import { useState } from 'react';
 import {
     ChevronDown,
     Heart,
-    Calendar,
-    Search,
     Menu,
     X,
     PhoneCall
@@ -51,7 +49,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-[#f8d287] sticky top-0 z-50 transition-all">
-            <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-400 mx-auto px-4 md:px-10 lg:px-8">
                 <div className="flex items-center justify-between h-20">
 
                     <Link to="/" className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -108,13 +106,6 @@ const Navbar = () => {
                     </div>
 
                     <div className="hidden lg:flex items-center gap-2 xl:gap-3">
-                        <Link to="/" className="btn-icon" title="Today's Puja Schedule">
-                            <Calendar className="w-4 h-4" />
-                        </Link>
-
-                        <button className="btn-icon" title="Search">
-                            <Search className="w-4 h-4" />
-                        </button>
 
                         <Link to="/" className="btn-outline">
                             <PhoneCall className="w-4 h-4" />
@@ -129,7 +120,7 @@ const Navbar = () => {
 
                     <div className="lg:hidden flex items-center gap-2">
                         <Link to="/" className="btn-primary text-xs px-3 py-1.5">
-                            <Heart className="w-3.5 h-3.5  fill-white/20" />
+                            
                             <span>Donate</span>
                         </Link>
                         <button

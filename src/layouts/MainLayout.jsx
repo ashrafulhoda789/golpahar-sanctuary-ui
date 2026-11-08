@@ -2,7 +2,6 @@ import { Outlet } from "react-router";
 import Navbar from "../components/common/Navbar";
 import Topbar from "../components/common/Topbar";
 import Footer from "../components/common/Footer";
-import HomeSwitcherBar from "../components/common/HomeSwitcherBar";
 import FooterTopbar from "../components/common/FooterTopbar";
 
 const MainLayout = () => {
@@ -15,7 +14,6 @@ const MainLayout = () => {
             </main>
             <FooterTopbar />
             <Footer />
-            <HomeSwitcherBar />
         </div>
     );
 };
