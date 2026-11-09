@@ -6,7 +6,7 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [lang, setLang] = useState(() => {
-    return localStorage.getItem('temple_lang') || 'bn';
+    return localStorage.getItem('temple_lang') || 'en';
   });
 
   useEffect(() => {
