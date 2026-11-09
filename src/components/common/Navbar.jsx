@@ -65,7 +65,7 @@ const Navbar = () => {
                                 {t?.header?.titleLine1 || 'Golpahar Mohashoshan'} <br />
                                 {t?.header?.titleLine2 || 'Kali Mandir'}
                             </span>
-                            <span className="block text-[9px] sm:text-[11px] tracking-wider text-maroon-800 dark:text-amber-400/80 uppercase font-medium">
+                            <span className="block text-[9px] sm:text-[10px] tracking-wider text-maroon-800 dark:text-amber-400/80 uppercase font-medium">
                                 {t?.header?.location || 'Chittagong'}
                             </span>
                         </div>
