@@ -112,9 +112,9 @@ const HeroBanner = () => {
         setCurrentIndex((prev) => (prev + 1) % templeImages.length);
 
     return (
-        <section className="relative bg-cream-100 dark:bg-[#23060b] min-h-svh lg:min-h-[calc(100svh-117px)] overflow-hidden py-0 transition-colors duration-300">
+        <section className="relative bg-cream-100 dark:bg-[#23060b] min-h-svh overflow-hidden py-0 transition-colors duration-300">
 
-            <div className="w-full h-full flex flex-col lg:flex-row items-stretch lg:min-h-[calc(100svh-117px)]">
+            <div className="w-full h-full flex flex-col lg:flex-row items-stretch lg:min-h-[calc(100svh-160px)]">
 
                 <div className="relative z-10 lg:w-[55%] bg-cream-100 dark:bg-[#23060b] flex flex-col justify-center items-center lg:items-start px-5 sm:px-10 lg:pl-20 lg:pr-12 pt-6 pb-8 lg:py-12 text-left transition-colors duration-300">
 
