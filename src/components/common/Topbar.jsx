@@ -31,7 +31,6 @@ const Topbar = () => {
         <header className="bg-maroon-900 text-amber-200/90 text-xs sm:text-sm py-2 px-2 sm:px-4 border-b border-rose-950/45 overflow-hidden w-full box-border">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 w-full">
 
-                {/* Contact Info */}
                 <div className="w-full md:w-auto flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-4 text-center sm:text-left min-w-0">
                     <a
                         href="tel:0241356335"

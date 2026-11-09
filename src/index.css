@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@variant dark (.dark &);
 
 @theme {
   --font-heading: "Cinzel Decorative", serif;
@@ -13,20 +14,40 @@
   --color-gold-500: #d4af37;
 }
 
+:root {
+  --bg-color: #faf6ee;
+  --text-color: #2d1a1e;
+}
+
+.dark {
+  --bg-color: #23060b; 
+  --text-color: #faf6ee; 
+}
+
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-cream-100);
-  color: #2d1a1e;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background-color: #4a0e17;
+  color: #faf6ee;
+}
+
+::-moz-selection {
+  background-color: #4a0e17;
+  color: #faf6ee;
 }
 
 @layer components {
- 
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-5 py-2 rounded-full bg-[#4a0e17] text-white font-medium text-sm hover:bg-[#63121f] transition-all shadow-sm active:scale-95;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2 rounded-full border border-[#4a0e17] text-[#4a0e17] font-medium text-sm hover:bg-[#4a0e17] hover:text-white transition-all active:scale-95;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2 rounded-full border border-[#4a0e17] text-[#4a0e17] dark:border-amber-400 dark:text-amber-400 font-medium text-sm hover:bg-[#4a0e17] hover:text-white dark:hover:bg-amber-400 dark:hover:text-maroon-900 transition-all active:scale-95;
   }
 
   .btn-icon {
