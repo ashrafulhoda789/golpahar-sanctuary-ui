@@ -5,11 +5,11 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const templeImages = [
     {
-        url: "https://i.ibb.co.com/nMC51Pmn/temple2.webp",
+        url: "https://i.ibb.co.com/tw9CgxkX/temple1.jpg",
         caption: "গোলপাহাড় মহাশ্মশান কালী মন্দির"
     },
     {
-        url: "https://i.ibb.co.com/tw9CgxkX/temple1.jpg",
+        url: "https://i.ibb.co.com/nMC51Pmn/temple2.webp",
         caption: "সন্ধ্যা আরতি"
     },
     {
@@ -187,13 +187,13 @@ const HeroBanner = () => {
 
                 <div className="relative group lg:w-[45%] w-full h-80 sm:h-112.5 lg:h-auto min-h-75 flex-1 mr-0">
 
-                    <div className="absolute inset-0 bg-[#4a0e17] dark:bg-black overflow-hidden">
+                    <div className="absolute inset-0 bg-maroon-900 dark:bg-black overflow-hidden">
                         {templeImages.map((image, index) => (
                             <img
                                 key={image.url}
                                 src={image.url}
                                 alt={image.caption}
-                                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'
+                                className={`absolute inset-0 w-full h-full object-fill transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'
                                     }`}
                             />
                         ))}
