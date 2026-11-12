@@ -5,10 +5,10 @@ import SignIn from "../pages/auth/SignInPage";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 import AdminLayout from "../pages/admin/AdminLayout";
 import DashboardOverview from "../pages/admin/DashboardOverview";
-import PageContent from "../pages/admin/PageContent";
 import PujaManagementPage from "../pages/admin/PujaManagement";
 import AboutUsPage from "../pages/about/AboutUs";
 import HistoryPage from "../pages/about/History";
+import PageContent from "../pages/admin/PageContent"
 import DeitiesPage from "../pages/deities/DeitiesPage";
 import PujaRitualsPage from "../pages/puja-rituals/Puja-Rituals";
 import ContactPage from "../pages/contact/ContactPage";
