@@ -1,46 +1,71 @@
 import { useState, useEffect } from 'react';
 import { Calendar as CalendarIcon, Clock, ChevronLeft, ChevronRight, Sun, Utensils, Flame, Moon, Sparkles } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import { fetchSiteSettings } from '../../lib/api/contents';
+
+const fallbackAartiSchedule = [
+    {
+        title_en: "Mangal Aarti",
+        title_bn: "মঙ্গলারতি",
+        time: "04:00 AM",
+        start: "04:00",
+        end: "05:00",
+        description_en: "Early morning awakening prayers.",
+        description_bn: "ভোরবেলার আরতি ও প্রার্থনা।",
+        icon: Sun
+    },
+    {
+        title_en: "Bhog Offering",
+        title_bn: "ভোগ নিবেদন",
+        time: "12:30 PM",
+        start: "12:00",
+        end: "13:30",
+        description_en: "Mahaprabhune bhog dhruvavani vidhi.",
+        description_bn: "মহাপ্রভুর ভোগ ও ধ্রুববাণী বিধি।",
+        icon: Utensils
+    },
+    {
+        title_en: "Sandhya Aarti",
+        title_bn: "সন্ধ্যা আরতি",
+        time: "6:30 PM",
+        start: "18:00",
+        end: "19:30",
+        description_en: "Sanjni divya aarti ane mahapuja.",
+        description_bn: "সন্ধ্যাবেলার দিব্য আরতি ও মহাপূজা।",
+        icon: Flame
+    },
+    {
+        title_en: "Shital Bhog & Shayan",
+        title_bn: "শীতল ভোগ ও শয়ন",
+        time: "8:00 PM",
+        start: "20:00",
+        end: "21:30",
+        description_en: "Ratrina samaye shital bhog ane shayan darshan.",
+        description_bn: "রাত্রিকালীন শীতল ভোগ ও শয়ন দর্শন।",
+        icon: Moon
+    }
+];
 
 const ArthiSchedule = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [currentTimeKey, setCurrentTimeKey] = useState('');
+    const [arthiList, setArthiList] = useState(fallbackAartiSchedule);
     const { t, lang } = useLanguage();
 
-    const arthiSchedule = [
-        {
-            title: t?.aarti?.mangal?.title || "Mangal Aarti",
-            time: t?.aarti?.mangal?.time || "4:00 AM",
-            start: "04:00",
-            end: "05:00",
-            desc: t?.aarti?.mangal?.desc || "Prabhuna divya darshan ane mangal aarti.",
-            icon: Sun
-        },
-        {
-            title: t?.aarti?.bhog?.title || "Bhog Offering",
-            time: t?.aarti?.bhog?.time || "12:30 PM",
-            start: "12:00",
-            end: "13:30",
-            desc: t?.aarti?.bhog?.desc || "Mahaprabhune bhog dhruvavani vidhi.",
-            icon: Utensils
-        },
-        {
-            title: t?.aarti?.sandhya?.title || "Sandhya Aarti",
-            time: t?.aarti?.sandhya?.time || "6:30 PM",
-            start: "18:00",
-            end: "19:30",
-            desc: t?.aarti?.sandhya?.desc || "Sanjni divya aarti ane mahapuja.",
-            icon: Flame
-        },
-        {
-            title: t?.aarti?.shayan?.title || "Shital Bhog & Shayan",
-            time: t?.aarti?.shayan?.time || "8:00 PM",
-            start: "20:00",
-            end: "21:30",
-            desc: t?.aarti?.shayan?.desc || "Ratrina samaye shital bhog ane shayan darshan.",
-            icon: Moon
+    // ব্যাকএন্ড থেকে সেটিংস ফেচ করা
+    useEffect(() => {
+        async function loadArthiData() {
+            try {
+                const settings = await fetchSiteSettings();
+                if (settings && settings.arthiSchedule && settings.arthiSchedule.length > 0) {
+                    setArthiList(settings.arthiSchedule);
+                }
+            } catch (err) {
+                console.error("Failed to load arthi schedule from backend, using fallback.", err);
+            }
         }
-    ];
+        loadArthiData();
+    }, []);
 
     useEffect(() => {
         const checkActiveAarti = () => {
@@ -101,10 +126,10 @@ const ArthiSchedule = () => {
                                     <span>{monthNames[month]} {year}</span>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                    <button onClick={prevMonth} className="p-1.5 rounded-full hover:bg-cream-300 dark:hover:bg-[#4a0e17] text-maroon-900 dark:text-cream-100 transition-colors cursor-pointer">
+                                    <button onClick={prevMonth} className="p-1.5 rounded-full hover:bg-cream-300 dark:hover:bg-maroon-900 text-maroon-900 dark:text-cream-100 transition-colors cursor-pointer">
                                         <ChevronLeft className="w-4 h-4" />
                                     </button>
-                                    <button onClick={nextMonth} className="p-1.5 rounded-full hover:bg-cream-300 dark:hover:bg-[#4a0e17] text-maroon-900 dark:text-cream-100 transition-colors cursor-pointer">
+                                    <button onClick={nextMonth} className="p-1.5 rounded-full hover:bg-cream-300 dark:hover:bg-maroon-900 text-maroon-900 dark:text-cream-100 transition-colors cursor-pointer">
                                         <ChevronRight className="w-4 h-4" />
                                     </button>
                                 </div>
@@ -133,7 +158,7 @@ const ArthiSchedule = () => {
                                             key={dayNum}
                                             className={`h-10 flex items-center justify-center rounded-xl text-sm font-medium transition-all ${isToday
                                                 ? 'bg-maroon-900 text-amber-200 dark:bg-amber-400 dark:text-maroon-950 shadow-md font-bold'
-                                                : 'text-gray-800 dark:text-cream-100 hover:bg-cream-300/70 dark:hover:bg-[#4a0e17]'
+                                                : 'text-gray-800 dark:text-cream-100 hover:bg-cream-300/70 dark:hover:bg-maroon-900'
                                                 }`}
                                         >
                                             {dayNum}
@@ -156,16 +181,24 @@ const ArthiSchedule = () => {
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {arthiSchedule.map((item, index) => {
-                                    const IconComponent = item.icon;
+                                {arthiList.map((item, index) => {
+                                    const IconComponent = item.icon || [Sun, Utensils, Flame, Moon][index % 4];
                                     const isLiveNow = currentTimeKey >= item.start && currentTimeKey <= item.end;
+
+                                    const itemTitle = lang === 'bn' 
+                                        ? (item.title_bn || item.title || 'আরতি') 
+                                        : (item.title_en || item.title || 'Aarti');
+
+                                    const itemDesc = lang === 'bn' 
+                                        ? (item.description_bn || item.desc || '') 
+                                        : (item.description_en || item.desc || '');
 
                                     return (
                                         <div
                                             key={index}
                                             className={`rounded-xl p-4 sm:p-5 transition-all flex flex-col justify-between group relative overflow-hidden text-white ${isLiveNow
-                                                    ? 'bg-[#40020d] dark:bg-[#4a0e17] border-2 border-amber-400 shadow-xl scale-[1.02]'
-                                                    : 'bg-[#750619] dark:bg-[#34080e] shadow-xs hover:shadow-md'
+                                                ? 'bg-[#40020d] dark:bg-maroon-900 border-2 border-amber-400 shadow-xl scale-[1.02]'
+                                                : 'bg-[#750619] dark:bg-[#34080e] shadow-xs hover:shadow-md'
                                                 }`}
                                         >
                                             {isLiveNow && (
@@ -188,7 +221,7 @@ const ArthiSchedule = () => {
                                                 </div>
 
                                                 <h4 className={`font-heading font-bold text-lg mb-1 transition-colors ${isLiveNow ? 'text-amber-300' : 'group-hover:text-amber-300'}`}>
-                                                    {item.title}
+                                                    {itemTitle}
                                                 </h4>
 
                                                 {isLiveNow && (
@@ -198,7 +231,7 @@ const ArthiSchedule = () => {
                                                 )}
 
                                                 <p className="text-xs sm:text-sm leading-relaxed text-cream-100/90">
-                                                    {item.desc}
+                                                    {itemDesc}
                                                 </p>
                                             </div>
                                         </div>

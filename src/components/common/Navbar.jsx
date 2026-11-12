@@ -28,27 +28,27 @@ const Navbar = () => {
         {
             name: t?.nav?.about || 'About',
             dropdown: [
-                { name: 'About Us', path: '/#' },
-                { name: 'History', path: '/#' }
+                { name: 'About Us', path: '/about-us' },
+                { name: 'History', path: '/history' }
             ]
         },
-        { name: t?.nav?.deities || 'Deities', path: '/#' },
+        { name: t?.nav?.deities || 'Deities', path: '/deities' },
         {
             name: t?.nav?.puja || 'Puja',
             dropdown: [
-                { name: 'Puja & Rituals', path: '/#' },
+                { name: 'Puja & Rituals', path: '/puja-rituals' },
                 { name: 'Puja List', path: '/#' }
             ]
         },
         {
             name: t?.nav?.festivals || 'Festivals',
             dropdown: [
-                { name: 'Upcoming Events', path: '/#' },
-                { name: 'Past Events', path: '/#' }
+                { name: 'Upcoming Events', path: '/upcoming-events' },
+                { name: 'Past Events', path: '/past-events' }
             ]
         },
-        { name: t?.nav?.gallery || 'Gallery', path: '/#' },
-        { name: t?.nav?.notice || 'Notice', path: '/#' }
+        { name: t?.nav?.gallery || 'Gallery', path: '/gallery' },
+        { name: t?.nav?.notice || 'Notice', path: '/notice' }
     ];
 
     return (
@@ -75,12 +75,12 @@ const Navbar = () => {
                         {navLinks.map((item, index) => {
                             if (item.dropdown) {
                                 return (
-                                    <div key={index} className="relative group">
+                                    <div key={index} className="relative group max-w-100">
                                         <button className="flex items-center gap-1 px-3 xl:px-4 py-2 rounded-full hover:bg-cream-200 dark:hover:bg-maroon-900/60 transition-colors">
                                             <span>{item.name}</span>
                                             <ChevronDown className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform" />
                                         </button>
-                                        <div className="absolute top-full left-0 hidden group-hover:block w-48 bg-cream-100 dark:bg-[#23060b] border border-cream-300 dark:border-amber-500/20 rounded-xl shadow-lg py-2 mt-1 z-50">
+                                        <div className="absolute top-full left-0 hidden group-hover:block w-48 bg-cream-100 dark:bg-[#23060b] border-l-3 border-maroon-800 dark:border-amber-500/20 shadow-lg py-2 mt-1 z-50">
                                             {item.dropdown.map((subItem, subIndex) => (
                                                 <Link
                                                     key={subIndex}
@@ -113,12 +113,12 @@ const Navbar = () => {
                     <div className="hidden xl:flex items-center gap-2 xl:gap-3">
                         <LanguageToggle />
                         <ThemeToggle />
-                        <Link to="/" className="btn-outline">
+                        <Link to="/contact" className="btn-outline">
                             <PhoneCall className="w-4 h-4" />
                             <span>{t?.nav?.contact || 'Contact'}</span>
                         </Link>
 
-                        <Link to="/" className="btn-primary">
+                        <Link to="/donation" className="btn-primary">
                             <Heart className="w-4 h-4 fill-white/20 text-white" />
                             <span>{t?.nav?.donate || 'Donate'}</span>
                         </Link>
@@ -188,7 +188,7 @@ const Navbar = () => {
                     })}
 
                     <Link
-                        to="/"
+                        to="/contact"
                         onClick={() => setMobileMenuOpen(false)}
                         className="block px-3 py-2 rounded-lg font-medium text-maroon-900 dark:text-cream-100 hover:bg-cream-200 dark:hover:bg-maroon-900 transition-colors"
                     >
@@ -211,7 +211,7 @@ const Navbar = () => {
 
                     <div className="pt-2 border-t border-cream-300 dark:border-amber-500/20 mt-3">
                         <Link
-                            to="/"
+                            to="/donation"
                             onClick={() => setMobileMenuOpen(false)}
                             className="btn-primary w-full flex items-center justify-center gap-2 py-2.5 text-sm font-semibold"
                         >
