@@ -42,7 +42,7 @@ export default function PujaRitualsPage() {
 
             <main className=" py-12 space-y-16">
 
-                <section className="space-y-8">
+                <section className="space-y-8 px-2">
                     <div className="text-center space-y-2">
                         <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded bg-amber-600/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/30">
                             {t.dailyBadge}
@@ -59,7 +59,7 @@ export default function PujaRitualsPage() {
                     <AnnualCalendarSection lang={lang} />
                 </section>
 
-                <section className="max-w-6xl mx-auto  space-y-8 pt-6 ">
+                <section className="max-w-6xl mx-auto px-6 space-y-8 pt-6 ">
                     <div className="text-center space-y-2">
                         <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded bg-amber-600 text-white shadow-sm">
                             {t.ritualsBadge}

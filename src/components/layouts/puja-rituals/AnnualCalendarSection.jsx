@@ -92,7 +92,7 @@ export default function AnnualCalendarSection({ lang = 'en', pujas = samplePujas
 
     return (
         <section className="bg-cream-200 dark:bg-maroon-900 py-8">
-            <div className='max-w-6xl mx-auto '>
+            <div className='max-w-6xl mx-auto px-2'>
                 <div className="text-center space-y-2">
                     <span className="inline-flex items-center gap-1.5 px-3.5 py-1 text-xs font-bold uppercase tracking-widest rounded-full bg-amber-600/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/30">
                         <CalendarIcon className="w-3.5 h-3.5" /> Annual Calendar

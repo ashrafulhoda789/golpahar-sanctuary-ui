@@ -132,7 +132,7 @@ export default function PujaManagementPage() {
     };
 
     return (
-        <div className="space-y-6 p-4 sm:p-6 min-h-screen transition-colors duration-300">
+        <div className="space-y-6 p-2 sm:p-6 min-h-screen transition-colors duration-300">
             <PujaHeader onAddClick={handleAddClick} />
 
             {notification.message && (
@@ -145,7 +145,6 @@ export default function PujaManagementPage() {
                 </div>
             )}
 
-            {/* PujaSelector now renders continuously */}
             <PujaSelector
                 pujas={pujas}
                 selectedPujaId={selectedPujaId}
