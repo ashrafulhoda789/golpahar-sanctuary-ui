@@ -5,7 +5,9 @@ export const getAllAlbums = async () => {
   try {
     const res = await fetch(`${API_BASE_URL}/gallery/albums`, {
       method: "GET",
-      credentials: "include",
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     return await res.json();
   } catch (error) {
@@ -19,7 +21,9 @@ export const getAllMedia = async (queryParams = "") => {
   try {
     const res = await fetch(`${API_BASE_URL}/gallery/media${queryParams}`, {
       method: "GET",
-      credentials: "include",
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     return await res.json();
   } catch (error) {

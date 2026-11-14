@@ -5,7 +5,9 @@ export const getAllNotices = async () => {
   try {
     const res = await fetch(`${API_BASE_URL}/notices`, {
       method: "GET",
-      credentials: "include",
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     return await res.json();
   } catch (error) {
@@ -18,7 +20,9 @@ export const getNoticeById = async (id) => {
   try {
     const res = await fetch(`${API_BASE_URL}/notices/${id}`, {
       method: "GET",
-      credentials: "include",
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     return await res.json();
   } catch (error) {

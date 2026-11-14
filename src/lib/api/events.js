@@ -5,7 +5,9 @@ export const getAllEvents = async () => {
     try {
         const res = await fetch(`${API_BASE_URL}/events`, {
             method: "GET",
-            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
         return await res.json();
     } catch (error) {
@@ -18,7 +20,9 @@ export const getEventById = async (id) => {
     try {
         const res = await fetch(`${API_BASE_URL}/events/${id}`, {
             method: "GET",
-            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
         return await res.json();
     } catch (error) {
