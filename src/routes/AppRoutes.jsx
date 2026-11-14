@@ -14,6 +14,10 @@ import PujaRitualsPage from "../pages/puja-rituals/Puja-Rituals";
 import ContactPage from "../pages/contact/ContactPage";
 import DonationPage from "../pages/donation/DonationPage";
 import NotFoundPage from "../pages/not-found/NotFound";
+import EventsNoticesManagementPage from "../pages/admin/EventsNoticesManagement";
+import GalleryManagementPage from "../pages/admin/GalleryManagement";
+import CommitteeManagementPage from "../pages/admin/CommitteeManagement";
+import UpcomingEventsPage from "../pages/festivals/UpcomingEvents";
 
 
 export const router = createBrowserRouter([
@@ -39,6 +43,10 @@ export const router = createBrowserRouter([
             {
                 path: "/puja-rituals",
                 element: <PujaRitualsPage />
+            },
+            {
+                path: "/upcoming-events",
+                element: <UpcomingEventsPage />
             },
             {
                 path: "/contact",
@@ -75,6 +83,18 @@ export const router = createBrowserRouter([
             {
                 path: "pujas",
                 element: <PujaManagementPage />
+            },
+            {
+                path: "notices",
+                element: <EventsNoticesManagementPage />
+            },
+            {
+                path: "gallery",
+                element: <GalleryManagementPage />
+            },
+            {
+                path: "committee",
+                element: <CommitteeManagementPage />
             }
         ]
     },

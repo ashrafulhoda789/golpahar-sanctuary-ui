@@ -44,7 +44,7 @@ const Navbar = () => {
             name: t?.nav?.festivals || 'Festivals',
             dropdown: [
                 { name: 'Upcoming Events', path: '/upcoming-events' },
-                { name: 'Past Events', path: '/past-events' }
+                { name: 'All Events', path: '/all-events' }
             ]
         },
         { name: t?.nav?.gallery || 'Gallery', path: '/gallery' },
