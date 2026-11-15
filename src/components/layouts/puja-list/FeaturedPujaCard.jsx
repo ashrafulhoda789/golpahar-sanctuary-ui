@@ -57,7 +57,7 @@ export default function FeaturedPujaCard({ puja }) {
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 text-xs font-bold uppercase tracking-widest rounded-full bg-amber-600 text-white shadow-sm">
               <Sparkles className="w-3.5 h-3.5" /> {t.featuredBadge}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-heading font-bold text-stone-900 dark:text-amber-100 font-serif">
+            <h2 className="text-2xl sm:text-4xl font-heading font-bold text-stone-900 dark:text-amber-100">
               {isBn ? (puja.title_bn || puja.title_en) : (puja.title_en || puja.title_bn)}
             </h2>
             <p className="text-xs sm:text-sm text-stone-500 dark:text-cream-200/70 font-medium">
