@@ -1,17 +1,14 @@
-import { useState } from 'react';
+
 import { Link } from 'react-router';
 import { useLanguage } from '../../context/LanguageContext';
 import { translations } from '../../locales/translations';
 import { Sparkles } from 'lucide-react';
-import DonationCauses from '../../components/layouts/donation/DonationCauses';
 import PaymentAccountsCard from '../../components/layouts/donation/PaymentAccountsCard';
 import DonationForm from '../../components/layouts/donation/DonationForm';
 
 export default function DonationPage() {
     const { lang } = useLanguage();
     const t = translations?.[lang]?.donationPage || translations?.en?.donationPage;
-
-    const [selectedCause, setSelectedCause] = useState('annadan');
 
     return (
         <div className="min-h-screen bg-[#fdfbf7] dark:bg-[#23060b] text-stone-800 dark:text-cream-100 transition-colors duration-300">
@@ -45,19 +42,13 @@ export default function DonationPage() {
             </div>
 
             <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-10">
-                <DonationCauses
-                    t={t}
-                    selectedCause={selectedCause}
-                    onSelectCause={setSelectedCause}
-                />
-
-                {/* Step 2: Payment Accounts & Confirmation Form Grid */}
+                
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                     <div className="lg:col-span-5">
                         <PaymentAccountsCard t={t} />
                     </div>
                     <div className="lg:col-span-7">
-                        <DonationForm t={t} selectedCause={selectedCause} />
+                        <DonationForm t={t} />
                     </div>
                 </div>
 

@@ -1,15 +1,34 @@
 import { useState } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
+import { submitContactMessage } from '../../../lib/actions/contact';
+
 
 export default function ContactForm({ t }) {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 5000);
-        setFormData({ name: '', email: '', phone: '', message: '' });
+        setLoading(true);
+        setErrorMsg('');
+
+        try {
+            const res = await submitContactMessage(formData);
+            if (res && res.success) {
+                setSubmitted(true);
+                setFormData({ name: '', email: '', phone: '', message: '' });
+                setTimeout(() => setSubmitted(false), 5000);
+            } else {
+                setErrorMsg(res.message || 'Failed to send message.');
+            }
+        } catch (err) {
+            console.error(err);
+            setErrorMsg('Network error. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -25,6 +44,12 @@ export default function ContactForm({ t }) {
                     {t.formSubtitle}
                 </p>
             </div>
+
+            {errorMsg && (
+                <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-xs text-center">
+                    {errorMsg}
+                </div>
+            )}
 
             {submitted ? (
                 <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-center space-y-2 my-auto">
@@ -48,7 +73,6 @@ export default function ContactForm({ t }) {
                             <label className="block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1">{t.labelEmail}</label>
                             <input
                                 type="email"
-                                required
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                 className="w-full px-3.5 py-2 text-xs rounded-xl bg-stone-50 dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/30 text-stone-800 dark:text-cream-100 focus:outline-none focus:ring-1 focus:ring-amber-500"
@@ -79,9 +103,10 @@ export default function ContactForm({ t }) {
 
                     <button
                         type="submit"
-                        className="w-full py-2.5 px-4 text-xs font-bold uppercase tracking-wider rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                        disabled={loading}
+                        className="w-full py-2.5 px-4 text-xs font-bold uppercase tracking-wider rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
                     >
-                        <Send className="w-3.5 h-3.5" /> {t.btnSubmit}
+                        <Send className="w-3.5 h-3.5" /> {loading ? 'Sending...' : t.btnSubmit}
                     </button>
                 </form>
             )}

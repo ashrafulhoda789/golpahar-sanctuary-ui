@@ -178,7 +178,7 @@ export default function DeitiesPage() {
                 </div>
 
                 <div className='py-10 bg-maroon-900'>
-                    <div className="max-w-6xl mx-auto  bg-amber-600 text-stone-950 p-6 sm:p-8 rounded-3xl shadow-md text-center space-y-2">
+                    <div className="max-w-200 mx-auto  bg-[#F8D287] text-stone-950 p-4 sm:p-6 rounded-3xl shadow-md text-center space-y-2">
                         <Flame className="w-8 h-8 mx-auto text-maroon-900" />
                         <h3 className="text-base sm:text-lg font-heading font-bold">
                             {t.quoteBanner}
