@@ -836,7 +836,7 @@ export const translations = {
       mainSubtitle:
         "মন্দিরে অনুষ্ঠিত বিভিন্ন পবিত্র পূজা, হোম এবং বিশেষ মানত বা সেবাসমূহ দেখে নিন ও বুক করুন।",
       featuredBadge: "আসন্ন প্রধান আয়োজন",
-      offeringPrice: "মূল্য / প্রণামী",
+      offeringPrice: "দক্ষিণা",
       ruleLabel: "নিয়ম:",
       applyBtn: "আবেদন করুন",
       detailsBtn: "বিস্তারিত ও বুকিং",
