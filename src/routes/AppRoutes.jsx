@@ -20,6 +20,7 @@ import CommitteeManagementPage from "../pages/admin/CommitteeManagement";
 import UpcomingEventsPage from "../pages/festivals/UpcomingEvents";
 import GalleryPage from "../pages/gallery/Gallery";
 import NoticesPage from "../pages/notice/NoticePage";
+import PujaListPage from "../pages/puja-list/PujaListPage";
 
 
 export const router = createBrowserRouter([
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path: "/puja-rituals",
                 element: <PujaRitualsPage />
+            },
+            {
+                path: "/puja-list",
+                element: <PujaListPage />
             },
             {
                 path: "/upcoming-events",

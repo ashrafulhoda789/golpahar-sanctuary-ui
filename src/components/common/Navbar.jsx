@@ -31,7 +31,7 @@ const Navbar = () => {
       name: t?.nav?.puja || "Puja",
       dropdown: [
         { name: "Puja & Rituals", path: "/puja-rituals" },
-        { name: "Puja List", path: "/#" },
+        { name: "Puja List", path: "/puja-list" },
       ],
     },
     {
