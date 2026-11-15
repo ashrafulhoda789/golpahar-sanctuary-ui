@@ -3,8 +3,17 @@ import { useState, useEffect } from 'react';
 import { Mail, Phone, Trash2, Eye, RefreshCw, AlertCircle, AlertTriangle } from 'lucide-react';
 import { fetchContactMessages } from '../../lib/api/contact';
 import { deleteContactMessage } from '../../lib/actions/contact';
+import { useLanguage } from '../../context/LanguageContext';
+import { translations } from '../../locales/translations';
 
 export default function AdminContactMessages() {
+    const { lang } = useLanguage();
+    const t = translations?.[lang]?.adminContact || translations?.en?.adminContact || {
+        title: "Contact Messages",
+        subtitle: "Manage and review inquiries submitted by users through the contact form.",
+        refresh: "Refresh"
+    };
+
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -61,11 +70,11 @@ export default function AdminContactMessages() {
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white dark:bg-[#1a0408] border border-stone-200 dark:border-amber-500/25 p-6 rounded-3xl shadow-sm">
                 <div>
-                    <h1 className="text-2xl font-serif font-bold text-stone-900 dark:text-amber-100">
-                        Contact Messages
+                    <h1 className="text-2xl font-heading font-bold text-stone-900 dark:text-amber-100">
+                        {t.title}
                     </h1>
                     <p className="text-xs text-stone-500 dark:text-cream-200/70 mt-1">
-                        Manage and review inquiries submitted by users through the contact form.
+                        {t.subtitle}
                     </p>
                 </div>
                 <button
@@ -74,7 +83,7 @@ export default function AdminContactMessages() {
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-sm cursor-pointer disabled:opacity-50"
                 >
                     <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-                    Refresh
+                    {t.refresh}
                 </button>
             </div>
 
