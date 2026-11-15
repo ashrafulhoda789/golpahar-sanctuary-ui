@@ -166,17 +166,12 @@ export default function DeitiesPage() {
 
                             <div className="flex flex-wrap gap-3 pt-1">
                                 <Link
-                                    to="/admin/pujas"
+                                    to="/admin/puja-list"
                                     className="px-4 py-2 text-xs font-bold rounded-xl btn-primary shadow-md transition-all cursor-pointer"
                                 >
                                     {t.btnBookPuja}
                                 </Link>
-                                <button
-                                    onClick={() => handleOpenModal(deitiesData[0])}
-                                    className="px-4 py-2 text-xs btn-outline font-bold -50 transition-all cursor-pointer"
-                                >
-                                    {t.btnPhotoPolicy}
-                                </button>
+                                
                             </div>
                         </div>
                     </div>

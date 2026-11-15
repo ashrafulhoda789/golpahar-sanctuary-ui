@@ -107,7 +107,6 @@ export default function GalleryPage() {
 
             <main className="py-12 px-4 sm:px-6 max-w-7xl mx-auto space-y-20">
 
-                {/* ১. Our Gallery (ফটো গ্রিড সেকশন) */}
                 <section>
                     <div className="flex justify-between items-end mb-8 border-b border-stone-200 dark:border-amber-500/20 pb-4">
                         <div>
@@ -139,7 +138,6 @@ export default function GalleryPage() {
                     </div>
                 </section>
 
-                {/* ২. Album Section (স্লাইড করা যায় এমন) */}
                 <section className="bg-amber-50/50 dark:bg-[#1a0408]/60 rounded-3xl p-6 sm:p-10 border border-amber-200/60 dark:border-amber-500/30">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
                         <div>
@@ -197,7 +195,6 @@ export default function GalleryPage() {
                     </div>
                 </section>
 
-                {/* ৩. Video Section */}
                 <section>
                     <div className="flex justify-between items-end mb-8 border-b border-stone-200 dark:border-amber-500/20 pb-4">
                         <div>

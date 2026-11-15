@@ -22,23 +22,23 @@ const Navbar = () => {
     {
       name: t?.nav?.about || "About",
       dropdown: [
-        { name: "About Us", path: "/about-us" },
-        { name: "History", path: "/history" },
+        { name: t?.nav?.aboutUs || "About Us", path: "/about-us" },
+        { name: t?.nav?.history || "History", path: "/history" },
       ],
     },
     { name: t?.nav?.deities || "Deities", path: "/deities" },
     {
       name: t?.nav?.puja || "Puja",
       dropdown: [
-        { name: "Puja & Rituals", path: "/puja-rituals" },
-        { name: "Puja List", path: "/puja-list" },
+        { name: t?.nav?.pujaRituals || "Puja & Rituals", path: "/puja-rituals" },
+        { name: t?.nav?.pujaList || "Puja List", path: "/puja-list" },
       ],
     },
     {
       name: t?.nav?.festivals || "Festivals",
       dropdown: [
-        { name: "Upcoming Events", path: "/upcoming-events" },
-        { name: "All Events", path: "/all-events" },
+        { name: t?.nav?.upcomingEvents || "Upcoming Events", path: "/upcoming-events" },
+        { name: t?.nav?.allEvents || "All Events", path: "/all-events" },
       ],
     },
     { name: t?.nav?.gallery || "Gallery", path: "/gallery" },
