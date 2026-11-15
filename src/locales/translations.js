@@ -185,6 +185,19 @@ export const translations = {
         }
       ]
     },
+    noticesPage: {
+      breadcrumbHome: "Home",
+      breadcrumbNotices: "Notices & Circulars",
+      mainBadge: "Official Announcements",
+      mainTitle: "Temple Notices & Circulars",
+      mainSubtitle: "Stay updated with the latest announcements, ritual schedules, and important instructions from the temple committee.",
+      badgePinned: "Pinned / Recent",
+      badgeGeneral: "Notice",
+      publishedOn: "Published:",
+      expiryOn: "Valid Till:",
+      readMore: "View Details",
+      attachment: "Download Attachment"
+    },
     contactPage: {
       breadcrumbHome: "Home",
       breadcrumbContact: "Contact Us",
@@ -222,6 +235,28 @@ export const translations = {
 
       mapTitle: "Temple Location Map",
       mapPlaceholder: "Google Map Integration (Golpahar Mohashoshan Kali Mandir, Chattogram)"
+    },
+    galleryPage: {
+      breadcrumbHome: "Home",
+      breadcrumbGallery: "Gallery & Albums",
+      mainBadge: "Sacred Moments & Memories",
+      mainTitle: "Temple Gallery & Albums",
+      mainSubtitle: "Explore photographs and video highlights of various festivals, pujas, and sacred moments at Golpahar Mohashoshan Kali Mandir.",
+
+      // Our Gallery Section
+      ourGalleryTitle: "Our Gallery",
+      ourGallerySubtitle: "Glimpses of daily rituals and festive moments at the temple.",
+      galleryImageView: "Sacred View",
+
+      // Album Section
+      albumsTitle: "Albums",
+      albumsSubtitle: "Explore highlights through our albums. Click any album to open it.",
+      photosLabel: "Photos",
+      openAlbum: "OPEN ALBUM",
+
+      // Video Section
+      videoTitle: "Video Gallery",
+      videoSubtitle: "Special video moments from festivals and daily pujas."
     },
     donationPage: {
       breadcrumbHome: "Home",
@@ -464,6 +499,19 @@ export const translations = {
       tag: "দিব্য মুহূর্ত",
       title: "আমাদের গ্যালারি",
       viewAll: "সকল গ্যালারি"
+    },
+    bn: {
+      breadcrumbHome: "হোম",
+      breadcrumbNotices: "নোটিশ ও বিজ্ঞপ্তি",
+      mainBadge: "প্রাতিষ্ঠানিক ঘোষণা",
+      mainTitle: "মন্দিরের নোটিশ ও সার্কুলার",
+      mainSubtitle: "মন্দির পরিচালনা কমিটির সর্বশেষ ঘোষণা, পূজার সময়সূচি ও জরুরি নির্দেশাবলি সম্পর্কে আপডেট থাকুন।",
+      badgePinned: "মূল নোটিশ",
+      badgeGeneral: "সাধারণ নোটিশ",
+      publishedOn: "প্রকাশিত:",
+      expiryOn: "মেয়াদ শেষ:",
+      readMore: "বিস্তারিত দেখুন",
+      attachment: "সংযুক্ত ফাইল ডাউনলোড"
     },
     donation: {
       tag: "দান ও দক্ষিণা",
@@ -708,6 +756,28 @@ export const translations = {
 
       mapTitle: "মন্দিরের অবস্থান মানচিত্র",
       mapPlaceholder: "গোলপাহাড় মহাশ্মশান কালী মন্দির, চট্টগ্রাম, বাংলাদেশ"
+    },
+    galleryPage: {
+      breadcrumbHome: "হোম",
+      breadcrumbGallery: "গ্যালারি ও অ্যালবাম",
+      mainBadge: "পবিত্র স্মৃতি ও মুহূর্ত",
+      mainTitle: "মন্দির গ্যালারি ও অ্যালবাম",
+      mainSubtitle: "গোলপাহাড় মহাশ্মশান কালী মন্দিরের বিভিন্ন উৎসব, পূজা ও পবিত্র মুহূর্তের আলোকচিত্র ও ভিডিও এক নজরে।",
+
+      // Our Gallery Section
+      ourGalleryTitle: "আমাদের গ্যালারি",
+      ourGallerySubtitle: "মন্দিরের দৈনন্দিন ও উৎসবমুখর মুহূর্তের কিছু আলোকচিত্র।",
+      galleryImageView: "পবিত্র দৃশ্য",
+
+      // Album Section
+      albumsTitle: "অ্যালবামসমূহ",
+      albumsSubtitle: "আমাদের অ্যালবামের মাধ্যমে বিশেষ মুহূর্তগুলো ঘুরে দেখুন। যেকোনো অ্যালবাম দেখতে ক্লিক করুন।",
+      photosLabel: "টি ছবি",
+      openAlbum: "অ্যালবাম খুলুন",
+
+      // Video Section
+      videoTitle: "ভিডিও গ্যালারি",
+      videoSubtitle: "উৎসব ও পূজার বিশেষ ভিডিও মুহূর্তসমূহ।"
     },
     donationPage: {
       breadcrumbHome: "হোম",

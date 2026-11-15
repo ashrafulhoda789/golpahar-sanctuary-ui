@@ -18,6 +18,8 @@ import EventsNoticesManagementPage from "../pages/admin/EventsNoticesManagement"
 import GalleryManagementPage from "../pages/admin/GalleryManagement";
 import CommitteeManagementPage from "../pages/admin/CommitteeManagement";
 import UpcomingEventsPage from "../pages/festivals/UpcomingEvents";
+import GalleryPage from "../pages/gallery/Gallery";
+import NoticesPage from "../pages/notice/NoticePage";
 
 
 export const router = createBrowserRouter([
@@ -47,6 +49,14 @@ export const router = createBrowserRouter([
             {
                 path: "/upcoming-events",
                 element: <UpcomingEventsPage />
+            },
+            {
+                path: "/gallery",
+                element: <GalleryPage />
+            },
+            {
+                path: "/notice",
+                element: <NoticesPage />
             },
             {
                 path: "/contact",
