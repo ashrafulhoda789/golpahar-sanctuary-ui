@@ -229,12 +229,12 @@ const HeroBanner = () => {
                     </p>
 
                     <div className="mt-6 lg:mt-8 flex flex-wrap items-center justify-start gap-3 sm:gap-4">
-                        <Link to="/" className="btn-primary">
+                        <Link to="/puja-rituals" className="btn-primary">
                             <span>{t?.hero?.bookPuja || 'Book Puja'}</span>
                             <ArrowRight className="w-4 h-4" />
                         </Link>
 
-                        <Link to="/" className="btn-outline">
+                        <Link to="/donation" className="btn-outline">
                             <Calendar className="w-4 h-4" />
                             <span>{t?.hero?.donateNow || 'Donate Now'}</span>
                         </Link>

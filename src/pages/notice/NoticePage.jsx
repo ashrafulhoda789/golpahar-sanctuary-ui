@@ -91,7 +91,7 @@ export default function NoticesPage() {
                     </nav>
                 </div>
 
-                <header className="text-amber-100 py-10 px-4 sm:px-6 mt-6 shadow-md text-center space-y-3">
+                <header className="text-amber-100 py-10 px-4 sm:px-6 mt-6 shadow-md text-center space-y-4">
                     <span className="inline-flex items-center gap-1.5 px-3.5 py-1 text-xs font-bold uppercase tracking-widest rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
                         <Sparkles className="w-3.5 h-3.5" /> {t.mainBadge}
                     </span>

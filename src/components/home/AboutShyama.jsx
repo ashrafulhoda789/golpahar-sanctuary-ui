@@ -46,7 +46,7 @@ const DivinePresence = () => {
                             </p>
 
                             <div className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                                <Link to="/" className="btn-primary">
+                                <Link to="/about-us" className="btn-primary">
                                     <span className='font-bold'>{t?.divine?.exploreBtn || 'Explore Our Temple'}</span>
                                     <ArrowRight className="w-4 h-4 text-white" />
                                 </Link>

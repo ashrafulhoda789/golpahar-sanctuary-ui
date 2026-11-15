@@ -67,7 +67,7 @@ const Gallery = () => {
 
                 <div className='flex justify-center md:justify-end py-2'>
                     <Link
-                        to="/"
+                        to="/gallery"
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cream-200 border border-cream-200 text-maroon-900 font-heading font-semibold text-sm hover:bg-maroon-900 hover:text-amber-200 transition-all shadow-xs group"
                     >
                         <span>{t?.gallery?.viewAll || 'All Gallery'}</span>

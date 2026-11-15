@@ -185,6 +185,16 @@ export const translations = {
         }
       ]
     },
+    upcomingEventsPage: {
+      breadcrumbHome: "Home",
+      breadcrumbUpcoming: "Upcoming Events",
+      mainBadge: "DIVINE CELEBRATIONS",
+      mainTitle: "Upcoming Temple Event",
+      mainSubtitle: "Explore the upcoming major temple celebration and its day-wise schedules.",
+      loading: "Loading upcoming festival details...",
+      error: "Failed to load events data.",
+      noEvents: "No upcoming events found at the moment."
+    },
     noticesPage: {
       breadcrumbHome: "Home",
       breadcrumbNotices: "Notices & Circulars",
@@ -719,6 +729,16 @@ export const translations = {
         }
       ]
     },
+    upcomingEventsPage: {
+      breadcrumbHome: "হোম",
+      breadcrumbUpcoming: "আসন্ন উৎসব",
+      mainBadge: "পবিত্র উৎসব ও অনুষ্ঠান",
+      mainTitle: "আসন্ন মন্দিরের উৎসব",
+      mainSubtitle: "মন্দিরের আসন্ন প্রধান উৎসব এবং এর দিনভিত্তিক সময়সূচি দেখে নিন।",
+      loading: "আসন্ন উৎসবের বিবরণ লোড হচ্ছে...",
+      error: "ইভেন্টের ডেটা লোড করতে ব্যর্থ হয়েছে।",
+      noEvents: "এই মুহূর্তে কোনো আসন্ন ইভেন্ট পাওয়া যায়নি।"
+    },
     contactPage: {
       breadcrumbHome: "হোম",
       breadcrumbContact: "যোগাযোগ",
@@ -778,6 +798,19 @@ export const translations = {
       // Video Section
       videoTitle: "ভিডিও গ্যালারি",
       videoSubtitle: "উৎসব ও পূজার বিশেষ ভিডিও মুহূর্তসমূহ।"
+    },
+    noticesPage: {
+      breadcrumbHome: "হোম",
+      breadcrumbNotices: "নোটিশ ও বিজ্ঞপ্তি",
+      mainBadge: "প্রাতিষ্ঠানিক ঘোষণা",
+      mainTitle: "মন্দিরের নোটিশ ও বিজ্ঞপ্তি",
+      mainSubtitle: "মন্দির পরিচালনা কমিটির সর্বশেষ ঘোষণা, পূজার সময়সূচি ও জরুরি নির্দেশাবলি সম্পর্কে আপডেট থাকুন।",
+      badgePinned: "মূল নোটিশ",
+      badgeGeneral: "সাধারণ নোটিশ",
+      publishedOn: "প্রকাশিত:",
+      expiryOn: "মেয়াদ শেষ:",
+      readMore: "বিস্তারিত দেখুন",
+      attachment: "সংযুক্ত ফাইল ডাউনলোড"
     },
     donationPage: {
       breadcrumbHome: "হোম",
