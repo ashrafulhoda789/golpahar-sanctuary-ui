@@ -62,7 +62,7 @@ export default function EventForm({
                             } else if (Array.isArray(s.activities)) {
                                 parsedActivities = s.activities;
                             }
-                            // eslint-disable-next-line no-unused-vars
+                        // eslint-disable-next-line no-unused-vars
                         } catch (e) {
                             parsedActivities = [];
                         }
@@ -149,31 +149,35 @@ export default function EventForm({
     };
 
     const inputClass =
-        "w-full px-3.5 py-2.5 rounded-lg border border-stone-300 dark:border-amber-500/20 bg-white dark:bg-[#1a0509] text-stone-800 dark:text-cream-100 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors";
+        "w-full px-3.5 py-2 text-xs rounded-xl bg-stone-50 dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/30 text-stone-800 dark:text-cream-100 placeholder-stone-400 dark:placeholder-cream-200/30 focus:outline-none focus:ring-1 focus:ring-amber-500";
     const labelClass =
-        "block text-xs font-semibold tracking-wider text-stone-600 dark:text-cream-200/80 mb-1.5";
+        "block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1";
 
     return (
         <form
             onSubmit={handleFormSubmit}
-            className="bg-white dark:bg-[#2a080e] border border-stone-200 dark:border-amber-500/20 rounded-xl p-4 sm:p-6 shadow-sm space-y-6"
+            className="space-y-6"
         >
-            <div className="flex items-center justify-between border-b border-stone-200 dark:border-amber-500/20 pb-3">
-                <h2 className="text-lg font-bold text-maroon-900 dark:text-amber-400">
-                    {isEditMode ? t.editEventTitle : t.createEventTitle}
-                </h2>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100 dark:border-amber-500/15">
+                <div>
+                    <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded bg-amber-600 text-white mb-2">
+                        {isEditMode ? 'Edit Mode' : 'Creation Mode'}
+                    </span>
+                    <h2 className="text-lg font-serif font-bold text-stone-900 dark:text-amber-100">
+                        {isEditMode ? t.editEventTitle : t.createEventTitle}
+                    </h2>
+                </div>
                 {!isEditMode && onCancel && (
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="text-xs flex items-center gap-1 text-stone-500 hover:text-stone-800 dark:text-cream-200/70 dark:hover:text-cream-100 cursor-pointer"
+                        className="text-xs font-bold text-stone-400 hover:text-stone-700 dark:hover:text-amber-200 cursor-pointer flex items-center gap-1"
                     >
                         <X className="w-4 h-4" /> {t.btnCancel}
                     </button>
                 )}
             </div>
 
-            {/* Main Form Fields Component */}
             <EventFormFields
                 t={t}
                 formData={formData}
@@ -182,17 +186,16 @@ export default function EventForm({
                 labelClass={labelClass}
             />
 
-            {/* Registration Required & Deadline */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-stone-50 dark:bg-[#1a0509]/60 p-4 rounded-lg border border-stone-200 dark:border-amber-500/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-stone-50 dark:bg-[#23060b] p-4 rounded-2xl border border-stone-200 dark:border-amber-500/20">
                 <div>
                     <label className={labelClass}>{t.regRequired}</label>
                     <div className="flex items-center gap-3 mt-1">
                         <button
                             type="button"
                             onClick={() => handleRegistrationToggle(true)}
-                            className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${formData.isRegistrationRequired
-                                ? "bg-amber-600 text-white"
-                                : "bg-stone-200 dark:bg-[#2a080e] text-stone-700 dark:text-cream-200"
+                            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${formData.isRegistrationRequired
+                                    ? "bg-amber-600 text-white shadow-xs"
+                                    : "bg-white dark:bg-stone-800 text-stone-700 dark:text-cream-200 border border-stone-200 dark:border-amber-500/20"
                                 }`}
                         >
                             {t.yes}
@@ -200,9 +203,9 @@ export default function EventForm({
                         <button
                             type="button"
                             onClick={() => handleRegistrationToggle(false)}
-                            className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-colors cursor-pointer ${!formData.isRegistrationRequired
-                                ? "bg-amber-600 text-white"
-                                : "bg-stone-200 dark:bg-[#2a080e] text-stone-700 dark:text-cream-200"
+                            className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${!formData.isRegistrationRequired
+                                    ? "bg-amber-600 text-white shadow-xs"
+                                    : "bg-white dark:bg-stone-800 text-stone-700 dark:text-cream-200 border border-stone-200 dark:border-amber-500/20"
                                 }`}
                         >
                             {t.no}
@@ -233,7 +236,7 @@ export default function EventForm({
                         value={formData.description_en}
                         onChange={handleChange}
                         placeholder="Write event details in English..."
-                        className={inputClass}
+                        className={`${inputClass} resize-none`}
                     />
                 </div>
                 <div>
@@ -244,12 +247,11 @@ export default function EventForm({
                         value={formData.description_bn}
                         onChange={handleChange}
                         placeholder="বাংলায় অনুষ্ঠানের বিস্তারিত লিখুন..."
-                        className={inputClass}
+                        className={`${inputClass} resize-none`}
                     />
                 </div>
             </div>
 
-            {/* Schedule Section */}
             <EventScheduleSection
                 schedules={formData.schedules}
                 onAddSchedule={handleAddSchedule}
@@ -261,11 +263,11 @@ export default function EventForm({
                 lang={lang}
             />
 
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-200 dark:border-amber-500/20">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-100 dark:border-amber-500/15">
                 <button
                     type="submit"
                     disabled={submitting}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-maroon-900 hover:bg-maroon-800 dark:bg-amber-600 dark:hover:bg-amber-500 text-white font-semibold text-sm transition-colors disabled:opacity-50 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-sm cursor-pointer disabled:opacity-50"
                 >
                     {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                     {isEditMode ? t.btnUpdate : t.btnSave}
@@ -276,7 +278,7 @@ export default function EventForm({
                         type="button"
                         disabled={submitting}
                         onClick={onDelete}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition-colors disabled:opacity-50 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white text-xs font-bold transition cursor-pointer disabled:opacity-50"
                     >
                         <Trash2 className="w-4 h-4" />
                         {t.btnDelete}

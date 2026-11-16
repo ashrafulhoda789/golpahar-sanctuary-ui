@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useCallback } from "react";
-import { Loader2, AlertTriangle, X } from "lucide-react";
+import { Loader2, AlertTriangle, CheckCircle2, AlertCircle } from "lucide-react";
 import { translations } from "../../locales/translations";
 import { useLanguage } from "../../context/LanguageContext";
 import { getAllEvents } from "../../lib/api/events";
@@ -17,7 +17,7 @@ export default function EventsNoticesManagementPage() {
         translations[lang]?.adminEventsNotices ||
         translations.en.adminEventsNotices;
 
-    const [activeTab, setActiveTab] = useState("events"); 
+    const [activeTab, setActiveTab] = useState("events");
     const [isAdding, setIsAdding] = useState(false);
 
     const [eventsList, setEventsList] = useState([]);
@@ -125,7 +125,6 @@ export default function EventsNoticesManagementPage() {
         setSubmitting(false);
     };
 
-    // Notice Handlers
     const handleCreateNotice = async (formData) => {
         setSubmitting(true);
         const json = await createNotice(formData);
@@ -153,7 +152,6 @@ export default function EventsNoticesManagementPage() {
         setSubmitting(false);
     };
 
-    // Trigger Notice Delete Modal
     const confirmDeleteNotice = () => {
         if (!selectedNoticeId) return;
         setShowDeleteModal(true);
@@ -177,7 +175,7 @@ export default function EventsNoticesManagementPage() {
     const selectedNotice = noticesList.find((n) => n.id === selectedNoticeId);
 
     return (
-        <div className="p-1 sm:p-4 space-y-6 text-stone-800 dark:text-cream-100 relative">
+        <div className="space-y-6 pb-12">
             <EventsNoticesHeader
                 t={t}
                 activeTab={activeTab}
@@ -199,112 +197,108 @@ export default function EventsNoticesManagementPage() {
 
             {feedback.message && (
                 <div
-                    className={`px-4 py-3 rounded-lg text-sm font-medium ${feedback.type === "success"
-                            ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30"
-                            : "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300 border border-red-300 dark:border-red-500/30"
+                    className={`flex items-center gap-2 p-4 rounded-2xl text-xs font-semibold border ${feedback.type === "success"
+                            ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
+                            : "bg-red-500/10 border-red-500/30 text-red-600"
                         }`}
                 >
-                    {feedback.message}
+                    {feedback.type === "success" ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
+                    <span>{feedback.message}</span>
                 </div>
             )}
 
-            {activeTab === "events" ? (
-                loading ? (
-                    <div className="flex justify-center py-16">
-                        <Loader2 className="w-8 h-8 animate-spin text-amber-600 dark:text-amber-400" />
-                    </div>
-                ) : isAdding ? (
-                    <EventForm
-                        t={t}
-                        isEditMode={false}
-                        onSubmit={handleCreateEvent}
-                        onCancel={() => setIsAdding(false)}
-                        submitting={submitting}
-                        lang={lang}
-                    />
-                ) : selectedEvent ? (
-                    <EventForm
-                        t={t}
-                        initialData={selectedEvent}
-                        isEditMode={true}
-                        onSubmit={handleUpdateEvent}
-                        onDelete={confirmDeleteEvent}
-                        submitting={submitting}
-                        lang={lang}
-                    />
+            <div className="bg-white dark:bg-[#1a0408] border border-stone-200 dark:border-amber-500/25 p-6 rounded-3xl shadow-sm">
+                {activeTab === "events" ? (
+                    loading ? (
+                        <div className="flex justify-center py-16">
+                            <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
+                        </div>
+                    ) : isAdding ? (
+                        <EventForm
+                            t={t}
+                            isEditMode={false}
+                            onSubmit={handleCreateEvent}
+                            onCancel={() => setIsAdding(false)}
+                            submitting={submitting}
+                            lang={lang}
+                        />
+                    ) : selectedEvent ? (
+                        <EventForm
+                            t={t}
+                            initialData={selectedEvent}
+                            isEditMode={true}
+                            onSubmit={handleUpdateEvent}
+                            onDelete={confirmDeleteEvent}
+                            submitting={submitting}
+                            lang={lang}
+                        />
+                    ) : (
+                        <div className="text-center py-12 text-xs text-stone-500 dark:text-stone-400">
+                            {t.selectEventPlaceholder || "No events found. Click 'Add Event' to create one."}
+                        </div>
+                    )
                 ) : (
-                    <div className="text-center py-12 bg-white dark:bg-[#2a080e] rounded-xl border border-stone-200 dark:border-amber-500/20 text-sm text-stone-500 dark:text-cream-200/70">
-                        {t.selectEventPlaceholder || "No events found. Click 'Add Event' to create one."}
-                    </div>
-                )
-            ) : (
-                /* Notice Management Section */
-                loading ? (
-                    <div className="flex justify-center py-16">
-                        <Loader2 className="w-8 h-8 animate-spin text-amber-600 dark:text-amber-400" />
-                    </div>
-                ) : isAdding ? (
-                    <NoticeForm
-                        t={t}
-                        isEditMode={false}
-                        onSubmit={handleCreateNotice}
-                        onCancel={() => setIsAdding(false)}
-                        submitting={submitting}
-                    />
-                ) : selectedNotice ? (
-                    <NoticeForm
-                        t={t}
-                        initialData={selectedNotice}
-                        isEditMode={true}
-                        onSubmit={handleUpdateNotice}
-                        onDelete={confirmDeleteNotice}
-                        submitting={submitting}
-                    />
-                ) : (
-                    <div className="text-center py-12 bg-white dark:bg-[#2a080e] rounded-xl border border-stone-200 dark:border-amber-500/20 text-sm text-stone-500 dark:text-cream-200/70">
-                        {t.selectNoticePlaceholder || "No notices found. Click 'Add Notice' to create one."}
-                    </div>
-                )
-            )}
+                    loading ? (
+                        <div className="flex justify-center py-16">
+                            <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
+                        </div>
+                    ) : isAdding ? (
+                        <NoticeForm
+                            t={t}
+                            isEditMode={false}
+                            onSubmit={handleCreateNotice}
+                            onCancel={() => setIsAdding(false)}
+                            submitting={submitting}
+                        />
+                    ) : selectedNotice ? (
+                        <NoticeForm
+                            t={t}
+                            initialData={selectedNotice}
+                            isEditMode={true}
+                            onSubmit={handleUpdateNotice}
+                            onDelete={confirmDeleteNotice}
+                            submitting={submitting}
+                        />
+                    ) : (
+                        <div className="text-center py-12 text-xs text-stone-500 dark:text-stone-400">
+                            {t.selectNoticePlaceholder || "No notices found. Click 'Add Notice' to create one."}
+                        </div>
+                    )
+                )}
+            </div>
 
             {showDeleteModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-                    <div className="bg-white dark:bg-[#2a080e] border border-stone-200 dark:border-amber-500/20 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 animate-in fade-in zoom-in duration-200">
-                        <div className="flex items-center justify-between">
-                            <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-950/60 flex items-center justify-center text-red-600 dark:text-red-400">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
+                    <div className="bg-white dark:bg-[#1a0408] border border-stone-200 dark:border-amber-500/30 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
+                        <div className="flex items-center gap-3 text-red-600">
+                            <div className="p-3 rounded-2xl bg-red-500/10">
                                 <AlertTriangle className="w-6 h-6" />
                             </div>
-                            <button
-                                onClick={() => setShowDeleteModal(false)}
-                                className="text-stone-400 hover:text-stone-700 dark:hover:text-cream-100 transition-colors"
-                            >
-                                <X className="w-5 h-5" />
-                            </button>
+                            <div>
+                                <h3 className="text-base font-bold font-serif text-stone-900 dark:text-amber-100">
+                                    {t.confirmDeleteTitle || "Are you sure?"}
+                                </h3>
+                                <p className="text-xs text-stone-500 dark:text-stone-400">
+                                    {t.confirmDelete || "You are about to delete this item. This action cannot be undone."}
+                                </p>
+                            </div>
                         </div>
 
-                        <div className="space-y-2">
-                            <h3 className="text-lg font-bold text-stone-900 dark:text-cream-100">
-                                {t.confirmDeleteTitle || "Are you sure?"}
-                            </h3>
-                            <p className="text-sm text-stone-600 dark:text-cream-200/70">
-                                {t.confirmDelete || "You are about to delete this item. This action cannot be undone."}
-                            </p>
-                        </div>
-
-                        <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-100 dark:border-amber-500/10">
+                        <div className="flex items-center justify-end gap-3 pt-2">
                             <button
                                 type="button"
                                 onClick={() => setShowDeleteModal(false)}
-                                className="px-4 py-2 rounded-lg border border-stone-300 dark:border-amber-500/20 text-stone-700 dark:text-cream-200 hover:bg-stone-100 dark:hover:bg-[#1a0509] text-sm font-semibold transition-colors"
+                                className="px-4 py-2 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-cream-200 text-xs font-bold transition cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-700"
                             >
                                 {t.btnCancel || "Cancel"}
                             </button>
                             <button
                                 type="button"
                                 onClick={activeTab === "events" ? executeDeleteEvent : executeDeleteNotice}
-                                className="px-5 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-colors shadow-sm"
+                                disabled={submitting}
+                                className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition cursor-pointer shadow-sm disabled:opacity-50"
                             >
-                                {t.btnDelete || "Delete"}
+                                {submitting ? "Deleting..." : (t.btnDelete || "Delete")}
                             </button>
                         </div>
                     </div>

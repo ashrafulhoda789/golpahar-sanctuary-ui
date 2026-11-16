@@ -1,7 +1,6 @@
 export default function EventFormFields({ t, formData, handleChange, inputClass, labelClass }) {
     return (
-        <div className="space-y-5">
-            {/* Title (EN & BN) */}
+        <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className={labelClass}>{t.titleEn || "Event Title (English)"} *</label>
@@ -29,7 +28,6 @@ export default function EventFormFields({ t, formData, handleChange, inputClass,
                 </div>
             </div>
 
-            {/* Category (EN & BN) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className={labelClass}>{t.categoryEn || "Category (English)"}</label>
@@ -55,7 +53,6 @@ export default function EventFormFields({ t, formData, handleChange, inputClass,
                 </div>
             </div>
 
-            {/* Event Date & Time + Status + Cover Image */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label className={labelClass}>{t.eventDateTime || "Event Date & Time"} *</label>
@@ -90,12 +87,11 @@ export default function EventFormFields({ t, formData, handleChange, inputClass,
                         value={formData.coverImage || ""}
                         onChange={handleChange}
                         placeholder="https://example.com/banner.jpg"
-                        className={inputClass}
+                        className={`${inputClass} font-mono`}
                     />
                 </div>
             </div>
 
-            {/* Location (EN & BN) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className={labelClass}>{t.locationEn || "Location (English)"}</label>
@@ -121,7 +117,6 @@ export default function EventFormFields({ t, formData, handleChange, inputClass,
                 </div>
             </div>
 
-            {/* Organizer (EN & BN) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className={labelClass}>{t.organizerEn || "Organizer (English)"}</label>

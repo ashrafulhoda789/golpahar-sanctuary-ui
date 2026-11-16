@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from "react";
 import { Save, Trash2, X, Loader2 } from "lucide-react";
 
@@ -25,7 +26,6 @@ export default function CommitteeForm({
 
     useEffect(() => {
         if (initialData) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
             setFormData({
                 name_en: initialData.nameEn || initialData.name_en || "",
                 name_bn: initialData.nameBn || initialData.name_bn || "",
@@ -55,31 +55,35 @@ export default function CommitteeForm({
     };
 
     const inputClass =
-        "w-full px-3.5 py-2.5 rounded-lg border border-stone-300 dark:border-amber-500/20 bg-white dark:bg-[#1a0509] text-stone-800 dark:text-cream-100 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors";
+        "w-full px-3.5 py-2 text-xs rounded-xl bg-stone-50 dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/30 text-stone-800 dark:text-cream-100 placeholder-stone-400 dark:placeholder-cream-200/30 focus:outline-none focus:ring-1 focus:ring-amber-500";
     const labelClass =
-        "block text-xs font-semibold tracking-wider text-stone-600 dark:text-cream-200/80 mb-1.5";
+        "block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1";
 
     return (
         <form
             onSubmit={handleFormSubmit}
-            className="bg-white dark:bg-[#2a080e] border border-stone-200 dark:border-amber-500/20 rounded-xl p-5 sm:p-6 shadow-sm space-y-5"
+            className="space-y-6"
         >
-            <div className="flex items-center justify-between border-b border-stone-200 dark:border-amber-500/20 pb-3">
-                <h2 className="text-lg font-bold text-maroon-900 dark:text-amber-400">
-                    {isEditMode ? t.editMemberTitle : t.createMemberTitle}
-                </h2>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100 dark:border-amber-500/15">
+                <div>
+                    <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded bg-amber-600 text-white mb-2">
+                        {isEditMode ? 'Edit Mode' : 'Creation Mode'}
+                    </span>
+                    <h2 className="text-lg font-serif font-bold text-stone-900 dark:text-amber-100">
+                        {isEditMode ? t.editMemberTitle : t.createMemberTitle}
+                    </h2>
+                </div>
                 {!isEditMode && onCancel && (
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="text-xs flex items-center gap-1 text-stone-500 hover:text-stone-800 dark:text-cream-200/70 dark:hover:text-cream-100"
+                        className="text-xs font-bold text-stone-400 hover:text-stone-700 dark:hover:text-amber-200 cursor-pointer flex items-center gap-1"
                     >
                         <X className="w-4 h-4" /> {t.btnCancel}
                     </button>
                 )}
             </div>
 
-            {/* Name (EN & BN) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className={labelClass}>{t.nameEn} *</label>
@@ -107,7 +111,6 @@ export default function CommitteeForm({
                 </div>
             </div>
 
-            {/* Position (EN & BN) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className={labelClass}>{t.positionEn} *</label>
@@ -135,7 +138,6 @@ export default function CommitteeForm({
                 </div>
             </div>
 
-            {/* Photo URL & Display Order */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="md:col-span-2">
                     <label className={labelClass}>{t.photoUrl}</label>
@@ -145,7 +147,7 @@ export default function CommitteeForm({
                         value={formData.photo_url}
                         onChange={handleChange}
                         placeholder="https://example.com/photo.jpg"
-                        className={inputClass}
+                        className={`${inputClass} font-mono`}
                     />
                 </div>
                 <div>
@@ -160,7 +162,6 @@ export default function CommitteeForm({
                 </div>
             </div>
 
-            {/* Phone & Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className={labelClass}>{t.phone}</label>
@@ -170,7 +171,7 @@ export default function CommitteeForm({
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+8801XXXXXXXXX"
-                        className={inputClass}
+                        className={`${inputClass} font-mono`}
                     />
                 </div>
                 <div>
@@ -181,17 +182,16 @@ export default function CommitteeForm({
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="member@example.com"
-                        className={inputClass}
+                        className={`${inputClass} font-mono`}
                     />
                 </div>
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-200 dark:border-amber-500/20">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-100 dark:border-amber-500/15">
                 <button
                     type="submit"
                     disabled={submitting}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-maroon-900 hover:bg-maroon-800 dark:bg-amber-600 dark:hover:bg-amber-500 text-white font-semibold text-sm transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-sm cursor-pointer disabled:opacity-50"
                 >
                     {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                     {isEditMode ? t.btnUpdate : t.btnSave}
@@ -202,7 +202,7 @@ export default function CommitteeForm({
                         type="button"
                         disabled={submitting}
                         onClick={onDelete}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition-colors disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white text-xs font-bold transition cursor-pointer disabled:opacity-50"
                     >
                         <Trash2 className="w-4 h-4" />
                         {t.btnDelete}

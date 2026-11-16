@@ -22,6 +22,7 @@ import GalleryPage from "../pages/gallery/Gallery";
 import NoticesPage from "../pages/notice/NoticePage";
 import PujaListPage from "../pages/puja-list/PujaListPage";
 import AdminContactMessages from "../pages/admin/ContactMessages";
+import DonationManagement from "../pages/admin/DonationPage";
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: "committee",
         element: <CommitteeManagementPage />,
+      },
+      {
+        path: "donation",
+        element: <DonationManagement />
       },
       {
         path: "messages",

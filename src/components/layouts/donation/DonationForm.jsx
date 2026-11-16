@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { HeartHandshake, CheckCircle2 } from 'lucide-react';
+import { submitDonation } from '../../../lib/actions/donations';
 
 const presetAmounts = [500, 1000, 2000, 5000];
 
@@ -10,19 +11,46 @@ export default function DonationForm({ t }) {
     const [phone, setPhone] = useState('');
     const [trxId, setTrxId] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!amount || amount <= 0) return;
 
-        // এখানে ভবিষ্যতে আপনার Backend API কল যুক্ত করতে পারবেন
-        setSubmitted(true);
-        setTimeout(() => {
-            setSubmitted(false);
-            setDonorName('');
-            setPhone('');
-            setTrxId('');
-        }, 5000);
+        setLoading(true);
+        setErrorMsg('');
+
+        let formattedMethod = 'bkash';
+        if (paymentMethod === 'Nagad') formattedMethod = 'nagad';
+        if (paymentMethod.includes('Bank')) formattedMethod = 'bank_transfer';
+
+        try {
+            const res = await submitDonation({
+                name: donorName.trim() || 'Anonymous',
+                phone: phone.trim(),
+                amount: Number(amount),
+                paymentMethod: formattedMethod,
+                transactionId: trxId.trim()
+            });
+
+            if (res && res.success) {
+                setSubmitted(true);
+                setDonorName('');
+                setPhone('');
+                setTrxId('');
+                setTimeout(() => {
+                    setSubmitted(false);
+                }, 5000);
+            } else {
+                setErrorMsg(res.message || 'Failed to submit donation.');
+            }
+        } catch (err) {
+            console.error(err);
+            setErrorMsg('Network error while submitting donation.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -36,6 +64,12 @@ export default function DonationForm({ t }) {
                 </h3>
             </div>
 
+            {errorMsg && (
+                <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-xs text-center">
+                    {errorMsg}
+                </div>
+            )}
+
             {submitted ? (
                 <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-center space-y-3 my-8">
                     <CheckCircle2 className="w-10 h-10 mx-auto" />
@@ -43,7 +77,6 @@ export default function DonationForm({ t }) {
                 </div>
             ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Preset Amounts */}
                     <div>
                         <label className="block text-xs font-bold text-stone-700 dark:text-amber-200 mb-2">
                             {t.selectAmountLabel}
@@ -55,8 +88,8 @@ export default function DonationForm({ t }) {
                                     type="button"
                                     onClick={() => setAmount(preset)}
                                     className={`py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${Number(amount) === preset
-                                            ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
-                                            : 'bg-stone-50 dark:bg-[#23060b] text-stone-700 dark:text-cream-100 border-stone-200 dark:border-amber-500/30 hover:border-amber-500'
+                                        ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
+                                        : 'bg-stone-50 dark:bg-[#23060b] text-stone-700 dark:text-cream-100 border-stone-200 dark:border-amber-500/30 hover:border-amber-500'
                                         }`}
                                 >
                                     ৳{preset}
@@ -74,7 +107,6 @@ export default function DonationForm({ t }) {
                         />
                     </div>
 
-                    {/* Donor Name & Phone */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1">
@@ -103,7 +135,6 @@ export default function DonationForm({ t }) {
                         </div>
                     </div>
 
-                    {/* Payment Method & Transaction ID */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1">
@@ -129,16 +160,17 @@ export default function DonationForm({ t }) {
                                 value={trxId}
                                 onChange={(e) => setTrxId(e.target.value)}
                                 placeholder={t.trxIdPlaceholder}
-                                className="w-full px-3.5 py-2 text-xs rounded-xl bg-stone-50 dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/30 text-stone-800 dark:text-cream-100 font-mono focus:outline-none focus:ring-1 focus:ring-amber-500"
+                                className="w-full px-3.5 py-2 text-xs rounded-xl bg-stone-50 dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/30 text-stone-800 dark:text-cream-100 font-mono focus:outline-none focus:ring-1 focus:ring-amber-500 uppercase"
                             />
                         </div>
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full py-3 px-4 mt-2 text-xs font-bold uppercase tracking-wider rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                        disabled={loading}
+                        className="w-full py-3 px-4 mt-2 text-xs font-bold uppercase tracking-wider rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
                     >
-                        <HeartHandshake className="w-4 h-4" /> {t.btnSubmit} (৳{amount || 0})
+                        <HeartHandshake className="w-4 h-4" /> {loading ? 'Submitting...' : `${t.btnSubmit} (৳${amount || 0})`}
                     </button>
                 </form>
             )}

@@ -24,7 +24,7 @@ export default function DashboardOverview() {
         { name: t?.adminSidebar?.noticesEvents || "Notices & Events", path: "/admin/dashboard/notices"},
         { name: t?.adminSidebar?.gallery || "Gallery", path: "/admin/dashboard/gallery"},
         { name: t?.adminSidebar?.committee || "Committee", path: "/admin/dashboard/committee" },
-        { name: t?.adminSidebar?.registeredDevotees || "Registered Devotees", path: "/admin/dashboard/users" },
+        { name: t?.adminSidebar?.registeredDevotees || "Donation", path: "/admin/dashboard/donations" },
         { name: t?.adminSidebar?.contactMessages || "Contact Messages", path: "/admin/dashboard/messages" },
     ];
 
@@ -43,7 +43,7 @@ export default function DashboardOverview() {
     ];
 
     return (
-        <div className="space-y-8 max-w-350 mx-auto font-sans">
+        <div className="space-y-8 font-sans">
 
             <div className="bg-white dark:bg-[#2e040a] p-5 rounded-2xl border border-stone-200 dark:border-amber-500/30 shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-4 transition-colors">
                 <div className="shrink-0 border-b xl:border-b-0 xl:border-r border-stone-200 dark:border-amber-500/20 pb-3 xl:pb-0 xl:pr-6">

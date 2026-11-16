@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from 'react';
 import { fetchPujas } from '../../lib/api/pujas';
 import { createPuja, deletePuja, updatePuja } from '../../lib/actions/pujas';
@@ -32,7 +33,6 @@ export default function PujaManagementPage() {
     const [selectedPujaId, setSelectedPujaId] = useState('');
     const [formData, setFormData] = useState(emptyFormState);
 
-    // Notification state
     const [notification, setNotification] = useState({ type: '', message: '' });
 
     const showNotification = (type, message) => {
@@ -56,7 +56,6 @@ export default function PujaManagementPage() {
     };
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         loadPujas();
     }, []);
 
@@ -132,34 +131,36 @@ export default function PujaManagementPage() {
     };
 
     return (
-        <div className="space-y-6 p-2 sm:p-6 min-h-screen transition-colors duration-300">
+        <div className="space-y-6 pb-12">
             <PujaHeader onAddClick={handleAddClick} />
 
             {notification.message && (
-                <div className={`flex items-center gap-2 p-3 rounded-xl text-xs font-semibold border transition-all ${notification.type === 'success'
+                <div className={`flex items-center gap-2 p-4 rounded-2xl text-xs font-semibold border ${notification.type === 'success'
                         ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400'
-                        : 'bg-rose-500/10 border-rose-500/30 text-rose-600 dark:text-rose-400'
+                        : 'bg-red-500/10 border-red-500/30 text-red-600'
                     }`}>
                     {notification.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
                     <span>{notification.message}</span>
                 </div>
             )}
 
-            <PujaSelector
-                pujas={pujas}
-                selectedPujaId={selectedPujaId}
-                onSelect={handlePujaSelect}
-                loading={loading}
-            />
+            <div className="bg-white dark:bg-[#1a0408] border border-stone-200 dark:border-amber-500/25 p-6 rounded-3xl shadow-sm space-y-6">
+                <PujaSelector
+                    pujas={pujas}
+                    selectedPujaId={selectedPujaId}
+                    onSelect={handlePujaSelect}
+                    loading={loading}
+                />
 
-            <PujaForm
-                formData={formData}
-                setFormData={setFormData}
-                onSubmit={handleSubmit}
-                onDelete={handleDelete}
-                isEditing={Boolean(selectedPujaId)}
-                saving={saving}
-            />
+                <PujaForm
+                    formData={formData}
+                    setFormData={setFormData}
+                    onSubmit={handleSubmit}
+                    onDelete={handleDelete}
+                    isEditing={Boolean(selectedPujaId)}
+                    saving={saving}
+                />
+            </div>
         </div>
     );
 }

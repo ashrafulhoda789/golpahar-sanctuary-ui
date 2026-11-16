@@ -9,7 +9,8 @@ import {
     X,
     HeartHandshake,
     Layers,
-    BookOpen
+    BookOpen,
+    DollarSign
 } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { authClient } from "../../../lib/auth-client";
@@ -28,7 +29,7 @@ export default function AdminSidebar({ isSidebarOpen, setIsSidebarOpen }) {
         { name: t?.adminSidebar?.gallery || "Gallery", path: "/admin/dashboard/gallery", icon: Layers },
         { name: t?.adminSidebar?.bookingsPayments || "Bookings & Payments", path: "/admin/dashboard/bookings", icon: Calendar },
         { name: t?.adminSidebar?.committee || "Committee", path: "/admin/dashboard/committee", icon: Users },
-        { name: t?.adminSidebar?.registeredDevotees || "Registered Devotees", path: "/admin/dashboard/users", icon: Users },
+        { name: t?.adminSidebar?.registeredDevotees || "Donation", path: "/admin/dashboard/donation", icon: DollarSign },
         { name: t?.adminSidebar?.contactMessages || "Contact Messages", path: "/admin/dashboard/messages", icon: MessageSquare },
     ];
 

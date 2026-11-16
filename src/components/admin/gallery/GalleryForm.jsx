@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from "react";
 import { Save, Trash2, X, Loader2, Star } from "lucide-react";
 
@@ -17,7 +18,6 @@ export default function GalleryForm({
     useEffect(() => {
         if (initialData) {
             if (type === "album") {
-                // eslint-disable-next-line react-hooks/set-state-in-effect
                 setFormData({
                     title_en: initialData.titleEn || initialData.title_en || "",
                     title_bn: initialData.titleBn || initialData.title_bn || "",
@@ -75,30 +75,35 @@ export default function GalleryForm({
     };
 
     const inputClass =
-        "w-full px-3.5 py-2.5 rounded-lg border border-stone-300 dark:border-amber-500/20 bg-white dark:bg-[#1a0509] text-stone-800 dark:text-cream-100 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors";
+        "w-full px-3.5 py-2 text-xs rounded-xl bg-stone-50 dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/30 text-stone-800 dark:text-cream-100 placeholder-stone-400 dark:placeholder-cream-200/30 focus:outline-none focus:ring-1 focus:ring-amber-500";
     const labelClass =
-        "block text-xs font-semibold  tracking-wider text-stone-600 dark:text-cream-200/80 mb-1.5";
+        "block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1";
 
     return (
         <form
             onSubmit={handleFormSubmit}
-            className="bg-white dark:bg-[#2a080e] border border-stone-200 dark:border-amber-500/20 rounded-xl p-5 sm:p-6 shadow-sm space-y-5"
+            className="space-y-6"
         >
-            <div className="flex items-center justify-between border-b border-stone-200 dark:border-amber-500/20 pb-3">
-                <h2 className="text-lg font-bold text-maroon-900 dark:text-amber-400">
-                    {isEditMode
-                        ? type === "album"
-                            ? t.editAlbumTitle
-                            : t.editMediaTitle
-                        : type === "album"
-                            ? t.createAlbumTitle
-                            : t.createMediaTitle}
-                </h2>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100 dark:border-amber-500/15">
+                <div>
+                    <span className="inline-block px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded bg-amber-600 text-white mb-2">
+                        {isEditMode ? 'Edit Mode' : 'Creation Mode'}
+                    </span>
+                    <h2 className="text-lg font-serif font-bold text-stone-900 dark:text-amber-100">
+                        {isEditMode
+                            ? type === "album"
+                                ? t.editAlbumTitle
+                                : t.editMediaTitle
+                            : type === "album"
+                                ? t.createAlbumTitle
+                                : t.createMediaTitle}
+                    </h2>
+                </div>
                 {!isEditMode && onCancel && (
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="text-xs flex items-center gap-1 text-stone-500 hover:text-stone-800 dark:text-cream-200/70 dark:hover:text-cream-100"
+                        className="text-xs font-bold text-stone-400 hover:text-stone-700 dark:hover:text-amber-200 cursor-pointer flex items-center gap-1"
                     >
                         <X className="w-4 h-4" /> {t.btnCancel}
                     </button>
@@ -107,7 +112,6 @@ export default function GalleryForm({
 
             {type === "album" ? (
                 <>
-            
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className={labelClass}>{t.titleEn} *</label>
@@ -143,7 +147,7 @@ export default function GalleryForm({
                             value={formData.coverImage || ""}
                             onChange={handleChange}
                             placeholder="https://example.com/cover.jpg"
-                            className={inputClass}
+                            className={`${inputClass} font-mono`}
                         />
                     </div>
 
@@ -156,7 +160,7 @@ export default function GalleryForm({
                                 value={formData.description_en || ""}
                                 onChange={handleChange}
                                 placeholder="Album description..."
-                                className={inputClass}
+                                className={`${inputClass} resize-none`}
                             />
                         </div>
                         <div>
@@ -167,14 +171,13 @@ export default function GalleryForm({
                                 value={formData.description_bn || ""}
                                 onChange={handleChange}
                                 placeholder="অ্যালবামের বিবরণ..."
-                                className={inputClass}
+                                className={`${inputClass} resize-none`}
                             />
                         </div>
                     </div>
                 </>
             ) : (
                 <>
-                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className={labelClass}>{t.mediaType}</label>
@@ -206,7 +209,6 @@ export default function GalleryForm({
                         </div>
                     </div>
 
-                 
                     <div>
                         <label className={labelClass}>{t.mediaUrl} *</label>
                         <input
@@ -216,23 +218,23 @@ export default function GalleryForm({
                             value={formData.mediaUrl || ""}
                             onChange={handleChange}
                             placeholder="https://example.com/photo.jpg or YouTube URL"
-                            className={inputClass}
+                            className={`${inputClass} font-mono`}
                         />
                     </div>
 
                     {formData.mediaType === "video" && (
-                        <div className="bg-amber-50 dark:bg-amber-950/30 p-3.5 rounded-lg border border-amber-200 dark:border-amber-500/30 flex items-center gap-3">
+                        <div className="bg-stone-50 dark:bg-[#23060b] p-4 rounded-2xl border border-stone-200 dark:border-amber-500/20 flex items-center gap-3">
                             <input
                                 type="checkbox"
                                 name="isFeaturedVideo"
                                 id="isFeaturedVideo"
                                 checked={formData.isFeaturedVideo || false}
                                 onChange={handleChange}
-                                className="w-4 h-4 text-amber-600 rounded border-stone-300 focus:ring-amber-500"
+                                className="w-4 h-4 rounded border-stone-300 text-amber-600 focus:ring-amber-500 cursor-pointer"
                             />
                             <label
                                 htmlFor="isFeaturedVideo"
-                                className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300 flex items-center gap-1.5 cursor-pointer"
+                                className="text-xs font-bold text-stone-700 dark:text-amber-200 flex items-center gap-1.5 cursor-pointer"
                             >
                                 <Star className="w-4 h-4 text-amber-500 fill-amber-500" /> {t.featuredVideoLabel}
                             </label>
@@ -273,7 +275,7 @@ export default function GalleryForm({
                                 value={formData.caption_en || ""}
                                 onChange={handleChange}
                                 placeholder="Write caption..."
-                                className={inputClass}
+                                className={`${inputClass} resize-none`}
                             />
                         </div>
                         <div>
@@ -284,18 +286,18 @@ export default function GalleryForm({
                                 value={formData.caption_bn || ""}
                                 onChange={handleChange}
                                 placeholder="ক্যাপশন লিখুন..."
-                                className={inputClass}
+                                className={`${inputClass} resize-none`}
                             />
                         </div>
                     </div>
                 </>
             )}
 
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-200 dark:border-amber-500/20">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-100 dark:border-amber-500/15">
                 <button
                     type="submit"
                     disabled={submitting}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-maroon-900 hover:bg-maroon-800 dark:bg-amber-600 dark:hover:bg-amber-500 text-white font-semibold text-sm transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-sm cursor-pointer disabled:opacity-50"
                 >
                     {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                     {isEditMode ? t.btnUpdate : t.btnSave}
@@ -306,7 +308,7 @@ export default function GalleryForm({
                         type="button"
                         disabled={submitting}
                         onClick={onDelete}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition-colors disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-600/10 hover:bg-red-600 text-red-600 hover:text-white text-xs font-bold transition cursor-pointer disabled:opacity-50"
                     >
                         <Trash2 className="w-4 h-4" />
                         {t.btnDelete}

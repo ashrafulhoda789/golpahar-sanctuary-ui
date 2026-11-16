@@ -43,54 +43,51 @@ export default function EventScheduleSection({
     };
 
     return (
-        <div className="border-t border-stone-200 dark:border-amber-500/20 pt-5 space-y-4">
+        <div className="border-t border-stone-100 dark:border-amber-500/15 pt-5 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                    <h3 className="text-sm font-bold text-maroon-900 dark:text-amber-400 flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4" /> {t.schedulesTitle || "Day-wise Schedules & Programs"}
+                    <h3 className="text-sm font-bold font-serif text-stone-900 dark:text-amber-100 flex items-center gap-1.5">
+                        <Calendar className="w-4 h-4 text-amber-600" /> {t.schedulesTitle || "Day-wise Schedules & Programs"}
                     </h3>
-                    <p className="text-[11px] text-stone-500 dark:text-cream-200/60">
+                    <p className="text-[11px] text-stone-500 dark:text-cream-200/70">
                         {t.schedulesSubtitle || "Add specific dates, time slots, and activities for each day."}
                     </p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                    <button
-                        type="button"
-                        onClick={onAddSchedule}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold shadow-sm transition-colors cursor-pointer"
-                    >
-                        <Plus className="w-3.5 h-3.5" /> {t.addSchedule || "Add Day Schedule"}
-                    </button>
-                </div>
+                <button
+                    type="button"
+                    onClick={onAddSchedule}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-xs cursor-pointer"
+                >
+                    <Plus className="w-3.5 h-3.5" /> {t.addSchedule || "Add Day Schedule"}
+                </button>
             </div>
 
             {schedules.length === 0 ? (
-                <div className="text-center py-6 border border-dashed border-stone-300 dark:border-amber-500/20 rounded-lg text-xs text-stone-400">
+                <div className="text-center py-6 border border-dashed border-stone-200 dark:border-amber-500/20 rounded-2xl text-xs text-stone-400">
                     {t.noSchedules || "No day schedules added yet. Click 'Add Day Schedule' to begin."}
                 </div>
             ) : (
-                <div className="space-y-6">
+                <div className="space-y-4">
                     {schedules.map((sch, index) => (
                         <div
                             key={index}
-                            className="bg-stone-50 dark:bg-[#1a0509]/80 border border-stone-200 dark:border-amber-500/20 rounded-xl p-4 sm:p-5 space-y-4 relative shadow-sm"
+                            className="bg-stone-50 dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/25 rounded-2xl p-4 sm:p-5 space-y-4 shadow-2xs"
                         >
-                            <div className="flex items-center justify-between border-b border-stone-200 dark:border-amber-500/10 pb-2">
+                            <div className="flex items-center justify-between border-b border-stone-200/60 dark:border-amber-500/15 pb-2">
                                 <span className="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
                                     <Clock className="w-3.5 h-3.5" /> {isBn ? `তফসিল #${index + 1}` : `Schedule #${index + 1}`}
                                 </span>
                                 <button
                                     type="button"
                                     onClick={() => onRemoveSchedule(index)}
-                                    className="text-red-500 hover:text-red-700 text-xs font-semibold flex items-center gap-1 cursor-pointer"
+                                    className="px-3 py-1 text-xs font-bold rounded-xl bg-red-500/10 hover:bg-red-600 text-red-600 hover:text-white transition cursor-pointer"
                                 >
-                                    <Trash2 className="w-3.5 h-3.5" /> {t.remove || "Remove"}
+                                    ✕ {t.remove || "Remove"}
                                 </button>
                             </div>
 
-                           
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
                                     <label className={labelClass}>
                                         {isBn ? "দিনের লেবেল (ইংরেজি) *" : "Day Label (EN) *"}
@@ -116,8 +113,8 @@ export default function EventScheduleSection({
                                     />
                                 </div>
                             </div>
-                           
-                            <div className="grid grid-cols-1 gap-4">
+
+                            <div className="grid grid-cols-1 gap-3">
                                 <div>
                                     <label className={labelClass}>
                                         {isBn ? "তারিখ (Schedule Date) *" : "Schedule Date *"}
@@ -131,8 +128,7 @@ export default function EventScheduleSection({
                                 </div>
                             </div>
 
-       
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
                                     <label className={labelClass}>
                                         {isBn ? "দিনের শিরোনাম / থিম (ইংরেজি)" : "Day Title / Theme (EN)"}
@@ -158,32 +154,32 @@ export default function EventScheduleSection({
                                     />
                                 </div>
                             </div>
-                           
-                            <div className="border-t border-stone-200 dark:border-amber-500/10 pt-4 space-y-3">
+
+                            <div className="border-t border-stone-200/60 dark:border-amber-500/15 pt-3 space-y-3">
                                 <div className="flex items-center justify-between">
-                                    <label className="text-xs font-bold text-stone-700 dark:text-amber-300 flex items-center gap-1.5">
+                                    <label className="text-xs font-bold text-stone-800 dark:text-amber-200 flex items-center gap-1.5">
                                         <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                                         {isBn ? "কার্যক্রম বা সাব-ইভেন্টসমূহ (Activities)" : "Programme Activities"}
                                     </label>
                                     <button
                                         type="button"
                                         onClick={() => handleAddActivity(index)}
-                                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-maroon-900 text-amber-300 hover:bg-maroon-800 dark:bg-amber-600 dark:text-white text-[11px] font-semibold transition-colors cursor-pointer"
+                                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-bold transition cursor-pointer shadow-2xs"
                                     >
                                         <Plus className="w-3 h-3" /> {isBn ? "অ্যাক্টিভিটি যোগ করুন" : "Add Activity"}
                                     </button>
                                 </div>
 
                                 {(!sch.activities || sch.activities.length === 0) ? (
-                                    <div className="text-center py-4 border border-dashed border-stone-200 dark:border-amber-500/15 rounded-lg text-[11px] text-stone-400">
-                                        {isBn ? "কোনো অ্যাক্টিভিটি যোগ করা হয়নি। উপরে 'অ্যাক্টিভিটি যোগ করুন' এ ক্লিক করুন।" : "No activities added yet. Click 'Add Activity' above."}
+                                    <div className="text-center py-3 border border-dashed border-stone-200 dark:border-amber-500/20 rounded-xl text-[11px] text-stone-400">
+                                        {isBn ? "কোনো অ্যাক্টিভিটি যোগ করা হয়নি।" : "No activities added yet."}
                                     </div>
                                 ) : (
                                     <div className="space-y-3">
                                         {sch.activities.map((act, actIndex) => (
                                             <div
                                                 key={actIndex}
-                                                className="bg-white dark:bg-[#23060b] border border-stone-200 dark:border-amber-500/20 p-3.5 rounded-xl space-y-3 relative shadow-xs"
+                                                className="bg-white dark:bg-[#1a0408] border border-stone-200 dark:border-amber-500/20 p-3.5 rounded-xl space-y-3 relative shadow-2xs"
                                             >
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
@@ -199,9 +195,8 @@ export default function EventScheduleSection({
                                                 </div>
 
                                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                                    
                                                     <div>
-                                                        <label className="block text-[11px] font-medium text-stone-500 dark:text-cream-200/70 mb-1">
+                                                        <label className="block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1">
                                                             {isBn ? "সময় নির্বাচন করুন (Time) *" : "Select Time *"}
                                                         </label>
                                                         <input
@@ -213,7 +208,7 @@ export default function EventScheduleSection({
                                                     </div>
 
                                                     <div>
-                                                        <label className="block text-[11px] font-medium text-stone-500 dark:text-cream-200/70 mb-1">
+                                                        <label className="block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1">
                                                             {isBn ? "নাম (ইংরেজি) *" : "Activity Name [EN] *"}
                                                         </label>
                                                         <input
@@ -226,7 +221,7 @@ export default function EventScheduleSection({
                                                     </div>
 
                                                     <div>
-                                                        <label className="block text-[11px] font-medium text-stone-500 dark:text-cream-200/70 mb-1">
+                                                        <label className="block text-[11px] font-bold text-stone-700 dark:text-amber-200 mb-1">
                                                             {isBn ? "নাম (বাংলা) *" : "Activity Name [BN] *"}
                                                         </label>
                                                         <input

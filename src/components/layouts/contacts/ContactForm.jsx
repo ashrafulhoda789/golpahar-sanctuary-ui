@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
 import { submitContactMessage } from '../../../lib/actions/contact';
 
-
 export default function ContactForm({ t }) {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
