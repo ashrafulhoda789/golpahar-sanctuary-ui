@@ -1,11 +1,14 @@
-
+import { useState } from "react";
 import { Plus, Trash2, ArrowUp, ArrowDown, Sparkles, Save, Loader2 } from "lucide-react";
+import AboutCardModal from "./AboutCardModal"; 
 
 const AVAILABLE_ICONS = [
     "Flame", "Sparkles", "Heart", "Sun", "Moon", "Shield", "Star", "Award", "BookOpen", "Users", "Home", "Compass"
 ];
 
 export default function AboutForm({ data = {}, onChange, onSave, saving = false }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const aboutData = {
         pageTitle_en: data.pageTitle_en || "About Us",
         pageTitle_bn: data.pageTitle_bn || "আমাদের সম্পর্কে",
@@ -47,13 +50,9 @@ export default function AboutForm({ data = {}, onChange, onSave, saving = false 
         onChange({ ...aboutData, cards: updatedCards });
     };
 
-    const handleAddCard = () => {
+    const handleSaveNewCard = (newCardData) => {
         const newCard = {
-            icon: "Flame",
-            title_en: "",
-            title_bn: "",
-            description_en: "",
-            description_bn: "",
+            ...newCardData,
             order: aboutData.cards.length
         };
         onChange({ ...aboutData, cards: [...aboutData.cards, newCard] });
@@ -107,7 +106,6 @@ export default function AboutForm({ data = {}, onChange, onSave, saving = false 
                     </div>
                 </div>
             </div>
-
 
             <div className="space-y-4 pt-4 border-t border-stone-100 dark:border-amber-500/15">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">2. Who We Are Section & Featured Image</h4>
@@ -193,7 +191,7 @@ export default function AboutForm({ data = {}, onChange, onSave, saving = false 
                         <input type="text" value={aboutData.heritageTitle_en} onChange={(e) => handleChange("heritageTitle_en", e.target.value)} className={inputClass} />
                     </div>
                     <div>
-                        <label className={labelClass}>Heritage Title (BN)</label>
+                        <label className={labelClass}>Heritage Title (বাংলা)</label>
                         <input type="text" value={aboutData.heritageTitle_bn} onChange={(e) => handleChange("heritageTitle_bn", e.target.value)} className={inputClass} />
                     </div>
                 </div>
@@ -204,17 +202,17 @@ export default function AboutForm({ data = {}, onChange, onSave, saving = false 
             </div>
 
             <div className="space-y-4 pt-4 border-t border-stone-100 dark:border-amber-500/15">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-3">
                     <div>
                         <h4 className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">4. Overview Cards Builder</h4>
                         <p className="text-[11px] text-stone-500 dark:text-cream-200/70">Add, reorder, or customize the feature cards displayed in the heritage section.</p>
                     </div>
                     <button
                         type="button"
-                        onClick={handleAddCard}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-xs cursor-pointer"
+                        onClick={() => setIsModalOpen(true)}
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-xs cursor-pointer shrink-0"
                     >
-                        <Plus className="w-3.5 h-3.5" /> Add New Card
+                        <Plus className="w-4 h-4" /> Add New Card
                     </button>
                 </div>
 
@@ -336,6 +334,14 @@ export default function AboutForm({ data = {}, onChange, onSave, saving = false 
                     </button>
                 </div>
             )}
+
+            <AboutCardModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSaveCard={handleSaveNewCard}
+                inputClass={inputClass}
+                labelClass={labelClass}
+            />
         </div>
     );
 }
