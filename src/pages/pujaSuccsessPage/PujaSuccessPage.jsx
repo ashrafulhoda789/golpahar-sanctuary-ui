@@ -1,8 +1,7 @@
 import { useLocation, Link } from "react-router";
-import { CheckCircle2, Copy, ArrowLeft, Search, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { CheckCircle2, Copy, ArrowLeft, Search, Sparkles, MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "../../context/LanguageContext";
-
 
 export default function PujaSuccessPage() {
     const { lang } = useLanguage();
@@ -11,6 +10,16 @@ export default function PujaSuccessPage() {
     const [copied, setCopied] = useState(false);
 
     const isBn = lang === "bn";
+
+    useEffect(() => {
+        if (bookingData?.whatsappUrl) {
+            
+            const timer = setTimeout(() => {
+                window.open(bookingData.whatsappUrl, "_blank");
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [bookingData]);
 
     const handleCopy = () => {
         if (bookingData?.referenceCode) {
@@ -29,15 +38,15 @@ export default function PujaSuccessPage() {
 
                 <div className="space-y-2">
                     <span className="inline-flex items-center gap-1 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-                        <Sparkles className="w-3 h-3" /> {isBn ? "বুকিং সফল হয়েছে" : "Booking Successful"}
+                        <Sparkles className="w-3 h-3" /> {isBn ? "বুকিং সফল হয়েছে" : "Booking Successful"}
                     </span>
                     <h1 className="text-2xl font-serif font-bold text-stone-900 dark:text-amber-100">
-                        {isBn ? "ধন্যবাদ, আপনার পূজা বুকিং সম্পন্ন হয়েছে!" : "Thank You, Puja Booked Successfully!"}
+                        {isBn ? "ধন্যবাদ, আপনার পূজা বুকিং সম্পন্ন হয়েছে!" : "Thank You, Puja Booked Successfully!"}
                     </h1>
                     <p className="text-xs text-stone-500 dark:text-cream-200/70">
                         {isBn 
-                            ? "আপনার পূজাটি সফলভাবে তালিকাভুক্ত করা হয়েছে। পরবর্তীতে স্ট্যাটাস চেক করতে নিচের রেফারেন্স কোডটি সংরক্ষণ করুন।" 
-                            : "Your puja has been successfully registered. Please save the reference code below to track status."}
+                            ? "আপনার পূজাটি সফলভাবে তালিকাভুক্ত করা হয়েছে। আপনার হোয়াটসঅ্যাপে স্বয়ংক্রিয়ভাবে স্ট্যাটাস পাঠানো হচ্ছে..." 
+                            : "Your puja has been successfully registered. Status is being automatically sent to your WhatsApp..."}
                     </p>
                 </div>
 
@@ -52,7 +61,7 @@ export default function PujaSuccessPage() {
                             </span>
                             <button
                                 onClick={handleCopy}
-                                className="p-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 transition"
+                                className="p-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 transition cursor-pointer"
                                 title="Copy Code"
                             >
                                 <Copy className="w-4 h-4" />
@@ -60,13 +69,26 @@ export default function PujaSuccessPage() {
                         </div>
                         {copied && (
                             <span className="block text-[10px] text-green-600 font-medium">
-                                {isBn ? "কোডটি কপি করা হয়েছে!" : "Code copied to clipboard!"}
+                                {isBn ? "কোডটি কপি করা হয়েছে!" : "Code copied to clipboard!"}
                             </span>
                         )}
                     </div>
                 )}
 
                 <div className="pt-4 flex flex-col gap-3">
+                    
+                    {bookingData?.whatsappUrl && (
+                        <a
+                            href={bookingData.whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="py-3 px-4 rounded-xl bg-green-600 hover:bg-green-700 text-white text-xs font-bold transition flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                        >
+                            <MessageCircle className="w-4 h-4 fill-current" />
+                            <span>{isBn ? "হোয়াটসঅ্যাপে পুনরায় স্ট্যাটাস পাঠান" : "Resend Status on WhatsApp"}</span>
+                        </a>
+                    )}
+
                     <Link
                         to="/pujas/track"
                         className="py-3 px-4 rounded-xl bg-maroon-900 hover:bg-maroon-800 dark:bg-amber-600 dark:hover:bg-amber-700 text-white text-xs font-bold transition flex items-center justify-center gap-2 shadow-md"

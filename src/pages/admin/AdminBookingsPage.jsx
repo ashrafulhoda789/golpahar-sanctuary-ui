@@ -19,8 +19,6 @@ export default function AdminBookingsPage() {
     const [selectedBooking, setSelectedBooking] = useState(null);
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const [isScheduleOpen, setIsScheduleOpen] = useState(false);
-    
-    // Confirmation Modal States (Reject/Cancel এর জন্য)
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [bookingToReject, setBookingToReject] = useState(null);
 
@@ -47,7 +45,6 @@ export default function AdminBookingsPage() {
     }, []);
 
     const handleUpdateStatus = async (id, status) => {
-  
         if (status === 'rejected') {
             setBookingToReject(id);
             setIsConfirmOpen(true);
@@ -62,6 +59,12 @@ export default function AdminBookingsPage() {
         try {
             const res = await updateBookingStatus(id, { status });
             if (res.success) {
+               
+                setBookings((prevBookings) =>
+                    prevBookings.map((b) =>
+                        b.id === id ? { ...b, status: res.data.status, whatsappUrl: res.data.whatsappUrl } : b
+                    )
+                );
                 loadBookings(); 
             } else {
                 setActionError(res.message || "Failed to update status");
