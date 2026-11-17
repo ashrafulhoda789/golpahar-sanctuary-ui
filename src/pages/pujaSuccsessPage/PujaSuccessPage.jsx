@@ -98,7 +98,7 @@ export default function PujaSuccessPage() {
                     </Link>
 
                     <Link
-                        to="/pujas"
+                        to="/puja-list"
                         className="py-2.5 px-4 rounded-xl bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 text-stone-700 dark:text-cream-200 text-xs font-bold transition flex items-center justify-center gap-1.5"
                     >
                         <ArrowLeft className="w-4 h-4" />
