@@ -53,7 +53,7 @@ export default function AdminContactMessages() {
         setSelectedMessage(msg);
         setReplyText(msg.replyMessage || '');
 
-        if (msg.status === 'new' || msg.status === 'unread') {
+        if (msg?.status === 'new' || msg?.status === 'unread') {
             try {
                 const res = await markContactAsRead(msg.id);
                 if (res && res.success) {
