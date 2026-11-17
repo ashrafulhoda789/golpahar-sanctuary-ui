@@ -23,6 +23,9 @@ import NoticesPage from "../pages/notice/NoticePage";
 import PujaListPage from "../pages/puja-list/PujaListPage";
 import AdminContactMessages from "../pages/admin/ContactMessages";
 import DonationManagement from "../pages/admin/DonationPage";
+import PujaSuccessPage from "../pages/pujaSuccsessPage/PujaSuccessPage";
+import PujaTrackPage from "../pages/pujaTrack/PujaTrackPage";
+import AdminBookingsPage from "../pages/admin/AdminBookingsPage";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +55,14 @@ export const router = createBrowserRouter([
       {
         path: "/puja-list",
         element: <PujaListPage />,
+      },
+      {
+        path: "/pujas/success",
+        element: <PujaSuccessPage />,
+      },
+      { 
+        path: "/pujas/track",
+        element: <PujaTrackPage />,
       },
       {
         path: "/upcoming-events",
@@ -109,6 +120,10 @@ export const router = createBrowserRouter([
         element: <GalleryManagementPage />,
       },
       {
+        path: "bookings",
+        element: <AdminBookingsPage />,
+      },
+      {
         path: "committee",
         element: <CommitteeManagementPage />,
       },
@@ -120,6 +135,7 @@ export const router = createBrowserRouter([
         path: "messages",
         element: <AdminContactMessages />,
       },
+      
     ],
   },
 

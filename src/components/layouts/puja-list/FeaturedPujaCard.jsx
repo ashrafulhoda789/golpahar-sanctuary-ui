@@ -1,9 +1,8 @@
-import { Link } from "react-router";
 import { Clock, MapPin, Calendar, Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "../../../context/LanguageContext";
 import { translations } from "../../../locales/translations";
 
-export default function FeaturedPujaCard({ puja }) {
+export default function FeaturedPujaCard({ puja, onBookClick }) {
   const { lang } = useLanguage();
   const t = translations?.[lang]?.pujaListPage || translations?.en?.pujaListPage;
   const isBn = lang === "bn";
@@ -103,13 +102,13 @@ export default function FeaturedPujaCard({ puja }) {
               </span>
             </div>
 
-            <Link
-              to={`/pujas/${puja.id}`}
+            <button
+              onClick={onBookClick}
               className="py-3 px-6 rounded-xl bg-maroon-900 hover:bg-maroon-800 dark:bg-amber-600 dark:hover:bg-amber-700 text-white text-xs sm:text-sm font-bold transition flex items-center gap-2 shadow-md cursor-pointer"
             >
-              <span>{t.applyBtn}</span>
+              <span>{isBn ? "পূজা বুক করুন" : "Book Puja"}</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
         </div>
       </div>

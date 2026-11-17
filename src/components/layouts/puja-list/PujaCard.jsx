@@ -1,7 +1,6 @@
-import { Link } from 'react-router';
 import { Calendar, Tag, ArrowRight } from 'lucide-react';
 
-export default function PujaCard({ puja, lang }) {
+export default function PujaCard({ puja, lang, onBookClick }) {
   const isBn = lang === 'bn';
   
   const formatPrice = (priceVal) => {
@@ -57,13 +56,13 @@ export default function PujaCard({ puja, lang }) {
           {formatPrice(puja.price)}
         </span>
 
-        <Link 
-          to={`/pujas/${puja.id}`} 
-          className="py-2.5 px-4 rounded-xl bg-maroon-900 hover:bg-maroon-800 dark:bg-amber-600 dark:hover:bg-amber-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm"
+        <button 
+          onClick={onBookClick}
+          className="py-2.5 px-4 rounded-xl bg-maroon-900 hover:bg-maroon-800 dark:bg-amber-600 dark:hover:bg-amber-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
         >
-          <span>{isBn ? 'বিস্তারিত ও বুকিং' : 'Details & Book'}</span>
+          <span>{isBn ? 'পূজা বুক করুন' : 'Book Puja'}</span>
           <ArrowRight className="w-4 h-4" />
-        </Link>
+        </button>
       </div>
     </div>
   );

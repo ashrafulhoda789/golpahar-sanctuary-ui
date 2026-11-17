@@ -1,21 +1,25 @@
-import  { useState, useEffect } from 'react';
-import { Link } from 'react-router';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { useLanguage } from '../../context/LanguageContext';
 import { translations } from '../../locales/translations';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Search } from 'lucide-react';
 import { fetchPujas } from '../../lib/api/pujas';
 import FeaturedPujaCard from '../../components/layouts/puja-list/FeaturedPujaCard';
 import PujaCard from '../../components/layouts/puja-list/PujaCard';
 import PujaSteps from '../../components/layouts/puja-list/PujaSteps';
-
+import PujaBookingModal from '../../components/layouts/puja-bookings/PujaBookingModal';
 
 export default function PujaListPage() {
   const { lang } = useLanguage();
+  const navigate = useNavigate();
   const t = translations?.[lang]?.pujaListPage || translations?.en?.pujaListPage;
 
   const [pujas, setPujas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPuja, setSelectedPuja] = useState(null);
 
   useEffect(() => {
     const loadPujas = async () => {
@@ -37,6 +41,16 @@ export default function PujaListPage() {
     };
     loadPujas();
   }, [t.error]);
+
+  const handleOpenBooking = (puja) => {
+    setSelectedPuja(puja);
+    setIsModalOpen(true);
+  };
+
+  const handleSuccessBooking = (bookingData) => {
+
+    navigate('/pujas/success', { state: { bookingData } });
+  };
 
   const sortedPujas = [...pujas].sort((a, b) => {
     const dateA = new Date(a.event_date_time || a.eventDateTime || 0);
@@ -61,6 +75,14 @@ export default function PujaListPage() {
               {t.breadcrumbPujas}
             </span>
           </nav>
+
+          <Link
+            to="/pujas/track"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition shadow-sm"
+          >
+            <Search className="w-3.5 h-3.5" />
+            <span>{lang === 'bn' ? 'বুকিং স্ট্যাটাস ট্র্যাক করুন' : 'Track Booking'}</span>
+          </Link>
         </div>
 
         <header className="text-amber-100 py-10 px-4 sm:px-6 mt-6 shadow-md text-center space-y-3">
@@ -89,13 +111,22 @@ export default function PujaListPage() {
           </div>
         ) : (
           <>
-           
-            {featuredPuja && <FeaturedPujaCard puja={featuredPuja} />}
+            {featuredPuja && (
+              <FeaturedPujaCard 
+                puja={featuredPuja} 
+                onBookClick={() => handleOpenBooking(featuredPuja)} 
+              />
+            )}
 
             {remainingPujas.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-6">
                 {remainingPujas.map((puja, index) => (
-                  <PujaCard key={puja.id || index} puja={puja} lang={lang} />
+                  <PujaCard 
+                    key={puja.id || index} 
+                    puja={puja} 
+                    lang={lang} 
+                    onBookClick={() => handleOpenBooking(puja)} 
+                  />
                 ))}
               </div>
             )}
@@ -104,6 +135,14 @@ export default function PujaListPage() {
 
         <PujaSteps lang={lang} />
       </main>
+
+      <PujaBookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        puja={selectedPuja}
+        lang={lang}
+        onSuccessBooking={handleSuccessBooking}
+      />
     </div>
   );
 }
