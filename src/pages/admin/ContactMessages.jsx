@@ -53,7 +53,7 @@ export default function AdminContactMessages() {
         setSelectedMessage(msg);
         setReplyText(msg.replyMessage || '');
 
-        if (msg?.status === 'new' || msg?.status === 'unread') {
+        if (msg?.status === 'unread' || msg?.status === 'new') {
             try {
                 const res = await markContactAsRead(msg.id);
                 if (res && res.success) {
@@ -115,7 +115,6 @@ export default function AdminContactMessages() {
     };
 
     const filteredMessages = messages.filter((msg) => {
-        if (filterTab === 'New') return msg.status === 'new';
         if (filterTab === 'Unread') return msg.status === 'unread';
         if (filterTab === 'Read') return msg.status === 'read';
         if (filterTab === 'Replied') return msg.status === 'replied';

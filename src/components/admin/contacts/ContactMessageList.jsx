@@ -5,7 +5,6 @@ import {
   Trash2,
   Eye,
   CheckCircle,
-  Sparkles,
   Clock,
   BookOpen,
 } from "lucide-react";
@@ -26,10 +25,10 @@ export default function ContactMessageList({
   filterTab,
   setFilterTab,
 }) {
-  const tabs = ["All", "New", "Unread", "Read", "Replied"];
+  const tabs = ["All", "Unread", "Read", "Replied"];
 
   const getStatusBadge = (status) => {
-    const currentStatus = status ? status.toLowerCase() : "new";
+    const currentStatus = status ? status.toLowerCase() : "unread";
 
     if (currentStatus === "replied") {
       return (
@@ -45,16 +44,11 @@ export default function ContactMessageList({
         </span>
       );
     }
-    if (currentStatus === "unread") {
-      return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400">
-          <Clock className="w-3 h-3" /> Unread
-        </span>
-      );
-    }
+
+    // ডিফল্ট বা 'unread' (বা পুরনো 'new') হলে Unread দেখাবে
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-purple-600 dark:text-purple-400">
-        <Sparkles className="w-3 h-3" /> New
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400">
+        <Clock className="w-3 h-3" /> Unread
       </span>
     );
   };
@@ -110,8 +104,8 @@ export default function ContactMessageList({
               </thead>
               <tbody className="divide-y divide-stone-100 dark:divide-amber-500/10 text-xs">
                 {messages.map((msg) => {
-                  const isUnreadOrNew =
-                    msg.status === "new" || msg.status === "unread";
+                  const isUnread =
+                    msg?.status === "unread" || msg?.status === "new";
                   const isSelected = selectedMessage?.id === msg.id;
 
                   return (
@@ -120,22 +114,22 @@ export default function ContactMessageList({
                       className={`transition cursor-pointer ${
                         isSelected
                           ? "bg-amber-100/60 dark:bg-amber-950/50"
-                          : isUnreadOrNew
+                          : isUnread
                             ? "bg-amber-50/70 dark:bg-amber-950/25 font-medium"
                             : "hover:bg-stone-50 dark:hover:bg-stone-900/30"
                       }`}
                       onClick={() => onSelectMessage(msg)}
                     >
                       <td className="p-4 relative max-w-[250px] sm:max-w-xs">
-                          {isUnreadOrNew && (
-                              <span className="absolute left-1.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-amber-600 animate-pulse" />
-                          )}
-                          <span className="font-bold text-stone-900 dark:text-amber-100 block pl-2 truncate">
-                              {msg.name}
-                          </span>
-                          <p className="text-[11px] text-stone-500 dark:text-stone-400 pl-2 line-clamp-1 break-all">
-                              {msg.message}
-                          </p>
+                        {isUnread && (
+                          <span className="absolute left-1.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-amber-600 animate-pulse" />
+                        )}
+                        <span className="font-bold text-stone-900 dark:text-amber-100 block pl-2 truncate">
+                          {msg.name}
+                        </span>
+                        <p className="text-[11px] text-stone-500 dark:text-stone-400 pl-2 line-clamp-1 break-all">
+                          {msg.message}
+                        </p>
                       </td>
                       <td className="p-4 space-y-1">
                         <div className="flex items-center gap-1.5 text-stone-600 dark:text-cream-200/80">
@@ -187,8 +181,8 @@ export default function ContactMessageList({
           <div className="lg:hidden divide-y divide-stone-100 dark:divide-amber-500/10">
             {messages.map((msg) => {
               const isSelected = selectedMessage?.id === msg.id;
-              const isUnreadOrNew =
-                msg?.status === "new" || msg?.status === "unread";
+              const isUnread =
+                msg?.status === "unread" || msg?.status === "new";
 
               return (
                 <Fragment key={msg.id}>
@@ -199,18 +193,18 @@ export default function ContactMessageList({
                     className={`p-4 space-y-2.5 transition cursor-pointer relative ${
                       isSelected
                         ? "bg-amber-100/60 dark:bg-amber-950/50"
-                        : isUnreadOrNew
+                        : isUnread
                           ? "bg-amber-50/80 dark:bg-amber-950/30 border-l-4 border-amber-600"
                           : "hover:bg-stone-50 dark:hover:bg-stone-900/30"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <h4 className="text-xs font-bold text-stone-900 dark:text-amber-100 flex items-center gap-1.5">
-                          {isUnreadOrNew && (
-                            <span className="w-2 h-2 rounded-full bg-amber-600 animate-pulse" />
+                      <div className="min-w-0">
+                        <h4 className="text-xs font-bold text-stone-900 dark:text-amber-100 flex items-center gap-1.5 truncate">
+                          {isUnread && (
+                            <span className="w-2 h-2 rounded-full bg-amber-600 animate-pulse shrink-0" />
                           )}
-                          {msg.name}
+                          <span className="truncate">{msg.name}</span>
                         </h4>
                         <span className="text-[10px] text-stone-400">
                           {msg.createdAt
@@ -218,7 +212,7 @@ export default function ContactMessageList({
                             : "N/A"}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 shrink-0">
                         {getStatusBadge(msg.status)}
                         <button
                           type="button"
@@ -234,7 +228,7 @@ export default function ContactMessageList({
                       </div>
                     </div>
 
-                    <p className="text-xs text-stone-600 dark:text-stone-300 line-clamp-2">
+                    <p className="text-xs text-stone-600 dark:text-stone-300 line-clamp-2 break-all">
                       {msg.message}
                     </p>
 
